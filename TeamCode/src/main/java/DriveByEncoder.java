@@ -44,9 +44,9 @@ public class DriveByEncoder extends LinearOpMode {
     private ElapsedTime     runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
+    static final double     DRIVE_GEAR_REDUCTION    = .78 ;     // This is < 1.0 if geared UP (PicoBox Duo has 1:0.78, 1:1, and 1:1.28 ratios)
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.14159);
     static final double     DRIVE_SPEED             = 0.9;
     static final double     TURN_SPEED              = 0.8;
 
@@ -88,22 +88,24 @@ public class DriveByEncoder extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  90,  90, 5.0);  // S1: Forward 48 Inches with 5 Sec timeout
-        telemetry.addData("DriveForward", "Now");
+        encoderDrive(DRIVE_SPEED,  90,  90, 5.0);  // S1: Forward 90 Inches with 5 Sec timeout
+        telemetry.addData("DriveForward", "90");
         telemetry.update();
-        encoderDrive(TURN_SPEED,   100,  100, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        telemetry.addData("MotorPosition", robot.leftFrontDrive.getCurrentPosition());
+        telemetry.update();
+        sleep(500);
+        encoderDrive(TURN_SPEED,   10,  -10, 4.0);  // S2: Turn Right 10 Inches with 4 Sec timeout
         telemetry.addData("Turn", "Now");
         telemetry.update();
         encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
         telemetry.addData("DriveBackward", "Now");
         telemetry.update();
-
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
     /*
-     *  Method to perfmorm a relative move, based on encoder counts.
+     *  Method to perform a relative move, based on encoder counts.
      *  Encoders are not reset as the move is based on the current position.
      *  Move will stop if any of three conditions occur:
      *  1) Move gets to the desired position
@@ -120,9 +122,9 @@ public class DriveByEncoder extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftTarget1 = robot.leftBackDrive.getCurrentPosition() + (int)(-leftInches * COUNTS_PER_INCH);
+            newLeftTarget1 = robot.leftBackDrive.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
             newLeftTarget = robot.leftFrontDrive.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newRightTarget1 = robot.rightBackDrive.getCurrentPosition() + (int)(-rightInches * COUNTS_PER_INCH);
+            newRightTarget1 = robot.rightBackDrive.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
             newRightTarget = robot.rightBackDrive.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
             robot.leftFrontDrive.setTargetPosition(newLeftTarget);
             robot.leftBackDrive.setTargetPosition(newLeftTarget1);
@@ -142,12 +144,15 @@ public class DriveByEncoder extends LinearOpMode {
             robot.rightBackDrive.setPower(Math.abs(speed));
             robot.rightFrontDrive.setPower(Math.abs(speed));
 
-            // keep looping while we are still active, and there is time left, and both motors are running.
-            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
-            // its target position, the motion will stop.  This is "safer" in the event that the robot will
-            // always end the motion as soon as possible.
-            // However, if you require that BOTH motors have finished their moves before the robot continues
-            // onto the next step, use (isBusy() || isBusy()) in the loop test.
+            /* keep looping while we are still active, and there is time left, and both motors are running.
+             * Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
+             * its target position, the motion will stop.  This is "safer" in the event that the robot will
+             * always end the motion as soon as possible.
+             * However, if you require that BOTH motors have finished their moves before the robot continues
+             * onto the next step, use (isBusy() || isBusy()) in the loop test.
+            */
+
+            // Radabot has four drive motors. This code only uses two of them for the while loop monitoring
             while (opModeIsActive() && (runtime.seconds() < timeoutS) && (robot.leftFrontDrive.isBusy() && robot.rightFrontDrive.isBusy())){
 
                 // Display it for the driver.
@@ -172,7 +177,7 @@ public class DriveByEncoder extends LinearOpMode {
             robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            //  sleep(250);   // optional pause after each move
+             sleep(250);   // optional pause after each move
         }
     }
 }
