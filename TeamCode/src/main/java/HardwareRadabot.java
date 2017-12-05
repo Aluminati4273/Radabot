@@ -68,7 +68,12 @@ public class HardwareRadabot
     public DcMotor  lift = null;
 
     //servo start position/end position
-    //this is to initialize the end and start position of the jewel servo fairl self explanatory
+    //this is to initialize the end and start position of the jewel servo fairly self explanatory
+    // set all locations and positions for jewel servos
+    public final static double JEWEL_SERVO_BLUE_START = 0.0;
+    public final static double JEWEL_SERVO_RED_START = 1.0;
+    public final static double JEWEL_SERVO_BLUE_DETECT = 0.95;
+    public final static double JEWEL_SERVO_RED_DETECT = 0.05;
 
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.1;
@@ -77,12 +82,6 @@ public class HardwareRadabot
     public final static double GLYPH2_OPEN = 0.5;
     public final static double GLYPH1_CLOSED = 0.8;
     public final static double GLYPH2_CLOSED = 0.1;
-
-    // set all locations and positions for jewel servos
-    public final static double JEWEL_SERVO_BLUE_START = 0.0;
-    public final static double JEWEL_SERVO_RED_START = 1.0;
-    public final static double JEWEL_SERVO_BLUE_DETECT = 0.95;
-    public final static double JEWEL_SERVO_RED_DETECT = 0.05;
 
 
     /* Local OpMode members. */

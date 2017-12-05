@@ -36,7 +36,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 
-@Autonomous(name="Pushbot: Auto Drive By Encoder", group="Pushbot")
+@Autonomous(name="DriveByEncoder", group="Auto")
 public class DriveByEncoder extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -146,14 +146,14 @@ public class DriveByEncoder extends LinearOpMode {
 
             /* keep looping while we are still active, and there is time left, and both motors are running.
              * Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
-             * its target position, the motion will stop.  This is "safer" in the event that the robot will
+             * its target position, the motion will st op.  This is "safer" in the event that the robot will
              * always end the motion as soon as possible.
              * However, if you require that BOTH motors have finished their moves before the robot continues
              * onto the next step, use (isBusy() || isBusy()) in the loop test.
             */
 
             // Radabot has four drive motors. This code only uses two of them for the while loop monitoring
-            while (opModeIsActive() && (runtime.seconds() < timeoutS) && (robot.leftFrontDrive.isBusy() && robot.rightFrontDrive.isBusy())){
+            while (opModeIsActive() && (robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy())){
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget, newLeftTarget1,  newRightTarget, newRightTarget1);

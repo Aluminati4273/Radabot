@@ -69,6 +69,8 @@ public class RadabotRegisterOpModes
         manager.register("ColorCheck",ColorCheck.class);
         manager.register("MRI_Color_Sensors", MRI_Color_Sensors.class);
         manager.register("DriveByEncoder",DriveByEncoder.class);
+        manager.register("AutoBlue1", AutoBlue1.class);
+
 
 
       // Basic Templates
