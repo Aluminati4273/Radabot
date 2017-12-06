@@ -21,27 +21,48 @@ public class AutoBlue1 extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        robot.init(hardwareMap);
+
         //stop and reset encoders on plate motor
-        robot.plateDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.plateDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //set plate motor to run using encoder
-        robot.plateDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.plateDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         int plateTarget = robot.plateDrive.getCurrentPosition() + 2200;
         int plateTarget1 = robot.plateDrive.getCurrentPosition() - 2200;
-
-        robot.init(hardwareMap);
 
         waitForStart();
 
         //drop the servo arm (with color sensor)
         robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_DETECT);
+        telemetry.addData("I'm working:", "yep!");
+        telemetry.update();
+        sleep(250);
 
         // Turn On RUN_TO_POSITION for plate motor, set power, and run to position (see above)
-        robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        /*robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        sleep(250);
+        robot.plateDrive.setTargetPosition(2200);
+        sleep(250);
         robot.plateDrive.setPower(0.7);
-        robot.plateDrive.setTargetPosition(plateTarget);
+        telemetry.addData("I'm also working:", "down here!");
+        telemetry.update();
+        */
 
+        robot.plateDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.plateDrive.setPower(0.8);
+        sleep(700);
+        robot.plateDrive.setPower(0);
+        /*
+        while (opModeIsActive() && (robot.plateDrive.isBusy()))
+        {
+            telemetry.addData("I'm actually not working", "I'm waiting...");
+            telemetry.update();
+            telemetry.addData("PlateDrive motor position ",  robot.plateDrive.getCurrentPosition());
+            telemetry.update();
+        }
+        */
         //check color on sensor
 
 
@@ -52,15 +73,21 @@ public class AutoBlue1 extends LinearOpMode {
 
 
         //retract plate slide
-        robot.plateDrive.setPower(0.7);
-        robot.plateDrive.setTargetPosition(plateTarget1);
+        sleep(2050);
+        robot.plateDrive.setPower(-0.8);
+        sleep(700);
+        robot.plateDrive.setPower(0);
+        telemetry.addData("I'm not working:", "because I'm lazy!");
+        telemetry.update();
 
         //retract the servo arm
         robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_START);
+        sleep(250);
 
 
         // move robot forward (following retraction of the color sensor and the slide plate)
         encoder.encoderDrive(encoder.DRIVE_SPEED, 15, 15,3.0 );
+        sleep(250);
 
     }
 

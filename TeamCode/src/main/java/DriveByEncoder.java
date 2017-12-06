@@ -69,6 +69,7 @@ public class DriveByEncoder extends LinearOpMode {
         robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.plateDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         //set all drive motors to run using encoder
         robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
