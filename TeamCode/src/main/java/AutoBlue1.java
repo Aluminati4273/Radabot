@@ -40,21 +40,13 @@ public class AutoBlue1 extends LinearOpMode {
         telemetry.update();
         sleep(250);
 
-        // Turn On RUN_TO_POSITION for plate motor, set power, and run to position (see above)
-        /*robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        sleep(250);
-        robot.plateDrive.setTargetPosition(2200);
-        sleep(250);
+        // Turn On RUN_TO_POSITION for plate motor, set power, and run to position
+        robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.plateDrive.setTargetPosition(plateTarget);
         robot.plateDrive.setPower(0.7);
         telemetry.addData("I'm also working:", "down here!");
         telemetry.update();
-        */
 
-        robot.plateDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.plateDrive.setPower(0.8);
-        sleep(700);
-        robot.plateDrive.setPower(0);
-        /*
         while (opModeIsActive() && (robot.plateDrive.isBusy()))
         {
             telemetry.addData("I'm actually not working", "I'm waiting...");
@@ -62,7 +54,15 @@ public class AutoBlue1 extends LinearOpMode {
             telemetry.addData("PlateDrive motor position ",  robot.plateDrive.getCurrentPosition());
             telemetry.update();
         }
-        */
+
+        /*
+         * // Move plate drive by time and power (bad idea)
+         * robot.plateDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+         * robot.plateDrive.setPower(0.8);
+         * sleep(700);
+         * robot.plateDrive.setPower(0);
+         */
+
         //check color on sensor
 
 
@@ -72,13 +72,30 @@ public class AutoBlue1 extends LinearOpMode {
         //else if color sensor is red, drive backward
 
 
-        //retract plate slide
-        sleep(2050);
-        robot.plateDrive.setPower(-0.8);
-        sleep(700);
-        robot.plateDrive.setPower(0);
-        telemetry.addData("I'm not working:", "because I'm lazy!");
+        //retract plate slide using encoder and motor position
+        robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.plateDrive.setTargetPosition(plateTarget1);
+        robot.plateDrive.setPower(0.7);
+        telemetry.addData("I'm also working:", "down here!");
         telemetry.update();
+
+        while (opModeIsActive() && (robot.plateDrive.isBusy()))
+        {
+            telemetry.addData("I'm actually not working", "I'm waiting...");
+            telemetry.update();
+            telemetry.addData("PlateDrive motor position ",  robot.plateDrive.getCurrentPosition());
+            telemetry.update();
+        }
+
+        /*
+         * // Move plate drive by time and power (bad idea)
+         * sleep(2050);
+         * robot.plateDrive.setPower(-0.8);
+         * sleep(700);
+         * robot.plateDrive.setPower(0);
+         * telemetry.addData("I'm not working:", "because I'm lazy!");
+         * telemetry.update();
+         */
 
         //retract the servo arm
         robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_START);
@@ -87,7 +104,6 @@ public class AutoBlue1 extends LinearOpMode {
 
         // move robot forward (following retraction of the color sensor and the slide plate)
         encoder.encoderDrive(encoder.DRIVE_SPEED, 15, 15,3.0 );
-        sleep(250);
 
     }
 
