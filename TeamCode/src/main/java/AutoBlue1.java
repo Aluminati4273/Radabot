@@ -28,19 +28,38 @@ public class AutoBlue1 extends LinearOpMode {
         robot.plateDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         int plateTarget = robot.plateDrive.getCurrentPosition() + 2200;
+        int plateTarget1 = robot.plateDrive.getCurrentPosition() - 2200;
 
         robot.init(hardwareMap);
 
         waitForStart();
 
+        //drop the servo arm (with color sensor)
         robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_DETECT);
 
-        // Turn On RUN_TO_POSITION for plate motor
+        // Turn On RUN_TO_POSITION for plate motor, set power, and run to position (see above)
         robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.plateDrive.setPower(0.7);
         robot.plateDrive.setTargetPosition(plateTarget);
 
+        //check color on sensor
 
+
+        //if color sensor is blue, drive forward
+
+
+        //else if color sensor is red, drive backward
+
+
+        //retract plate slide
+        robot.plateDrive.setPower(0.7);
+        robot.plateDrive.setTargetPosition(plateTarget1);
+
+        //retract the servo arm
+        robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_START);
+
+
+        // move robot forward (following retraction of the color sensor and the slide plate)
         encoder.encoderDrive(encoder.DRIVE_SPEED, 15, 15,3.0 );
 
     }

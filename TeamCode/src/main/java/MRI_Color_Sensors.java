@@ -16,6 +16,7 @@ To change color sensor I2C Addresses, go to http://modernroboticsedu.com/mod/les
 Support is available by emailing support@modernroboticsinc.com.
 */
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -27,9 +28,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 
-//@TeleOp(name = "Color Sensors", group = "MRI")
-// @Autonomous(...) is the other common choice
-@Disabled
+
+@Autonomous
+
 public class MRI_Color_Sensors extends OpMode {
 
     /* Declare OpMode members. */
