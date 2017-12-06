@@ -35,7 +35,7 @@ public class AutoBlue1 extends LinearOpMode {
 
         robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_DETECT);
 
-        // Turn On RUN_TO_POSITION for plate motoer
+        // Turn On RUN_TO_POSITION for plate motor
         robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.plateDrive.setPower(0.7);
         robot.plateDrive.setTargetPosition(plateTarget);
