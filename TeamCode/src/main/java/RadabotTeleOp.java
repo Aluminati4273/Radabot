@@ -83,7 +83,6 @@ public class RadabotTeleOp extends LinearOpMode {
 
             // lift up using gamepad2 left stick
             robot.lift.setPower(gamepad2.left_stick_y);
-            robot.lift.setPower(gamepad2.left_stick_y);
 
             // control plate drive using gamepad2 right stick
             robot.plateDrive.setPower(-gamepad2.right_stick_x);

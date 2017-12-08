@@ -65,6 +65,8 @@ public class HardwareRadabot
     public Servo jewelServoRed = null;
     public Servo glyphServo1 = null;
     public Servo glyphServo2 = null;
+    public Servo glyphServo3 = null;
+    public Servo glyphServo4 = null;
     public DcMotor  lift = null;
 
     //servo start position/end position
@@ -78,10 +80,16 @@ public class HardwareRadabot
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.1;
     public final static double GLYPH2_START = 0.8;
+    public final static double GLYPH3_START = 0.1;
+    public final static double GLYPH4_START = 0.8;
     public final static double GLYPH1_OPEN = 0.4;
     public final static double GLYPH2_OPEN = 0.5;
+    public final static double GLYPH3_OPEN = 0.4;
+    public final static double GLYPH4_OPEN = 0.5;
     public final static double GLYPH1_CLOSED = 0.8;
     public final static double GLYPH2_CLOSED = 0.1;
+    public final static double GLYPH3_CLOSED = 0.8;
+    public final static double GLYPH4_CLOSED = 0.1;
 
 
     /* Local OpMode members. */
@@ -138,6 +146,10 @@ public class HardwareRadabot
         glyphServo1.setPosition(GLYPH1_START);
         glyphServo2 = hwMap.get(Servo.class, "glyph2");
         glyphServo2.setPosition(GLYPH2_START);
+        glyphServo3 = hwMap.get(Servo.class, "glyph3");
+        glyphServo3.setPosition(GLYPH3_START);
+        glyphServo4 = hwMap.get(Servo.class, "glyph4");
+        glyphServo4.setPosition(GLYPH4_START);
 
 
 
@@ -147,6 +159,8 @@ public class HardwareRadabot
         {
             glyphServo1.setPosition(GLYPH1_OPEN);
             glyphServo2.setPosition(GLYPH2_OPEN);
+            glyphServo3.setPosition(GLYPH3_OPEN);
+            glyphServo4.setPosition(GLYPH4_OPEN);
             glyphState = true;
         }
 
@@ -155,6 +169,8 @@ public class HardwareRadabot
         {
             glyphServo1.setPosition(GLYPH1_CLOSED);
             glyphServo2.setPosition(GLYPH2_CLOSED);
+            glyphServo3.setPosition(GLYPH3_CLOSED);
+            glyphServo4.setPosition(GLYPH4_CLOSED);
             glyphState = false;
         }
 
