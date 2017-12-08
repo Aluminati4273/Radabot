@@ -68,6 +68,7 @@ public class HardwareRadabot
     public Servo glyphServo3 = null;
     public Servo glyphServo4 = null;
     public DcMotor  lift = null;
+    public DcMotor relic = null;
 
     //servo start position/end position
     //this is to initialize the end and start position of the jewel servo fairly self explanatory
@@ -99,7 +100,8 @@ public class HardwareRadabot
     /* Public OpMode members. */
     public double threshold1 = 0.1;
     public double threshold2 = -0.1;
-    // bLedOn represents the state of the glyph claw.
+
+    // glyphState represents the state of the glyph claw.
     boolean glyphState = true;
 
     /* Constructor */
@@ -116,6 +118,7 @@ public class HardwareRadabot
         leftBackDrive = hwMap.get(DcMotor.class, "left_Back_Drive");
         rightBackDrive = hwMap.get(DcMotor.class, "right_Back_Drive");
         rightFrontDrive = hwMap.get(DcMotor.class, "right_Front_Drive");
+
         //this sets the left side to go the reverse direction because of how the motors are set up.
         rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -129,6 +132,7 @@ public class HardwareRadabot
         rightFrontDrive.setPower(0);
         rightBackDrive.setPower(0);
         plateDrive.setPower(0);
+        relic.setPower(0);
 
 
         // RUN_USING_ENCODERS on drivetrain.
