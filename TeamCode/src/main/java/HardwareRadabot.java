@@ -79,18 +79,18 @@ public class HardwareRadabot
     public final static double JEWEL_SERVO_RED_DETECT = 0.05;
 
     // set all locations and positions for the glyph servos
-    public final static double GLYPH1_START = 0.1;
-    public final static double GLYPH2_START = 0.8;
-    public final static double GLYPH3_START = 0.1;
-    public final static double GLYPH4_START = 0.8;
-    public final static double GLYPH1_OPEN = 0.4;
+    public final static double GLYPH1_START = 0.8;
+    public final static double GLYPH2_START = 0.0;
+    public final static double GLYPH3_START = 0.85;
+    public final static double GLYPH4_START = 0.1;
+    public final static double GLYPH1_OPEN = 0.15;
     public final static double GLYPH2_OPEN = 0.5;
-    public final static double GLYPH3_OPEN = 0.4;
-    public final static double GLYPH4_OPEN = 0.5;
-    public final static double GLYPH1_CLOSED = 0.8;
-    public final static double GLYPH2_CLOSED = 0.1;
-    public final static double GLYPH3_CLOSED = 0.8;
-    public final static double GLYPH4_CLOSED = 0.1;
+    public final static double GLYPH3_OPEN = 0.25;
+    public final static double GLYPH4_OPEN = 0.675;
+    public final static double GLYPH1_CLOSED = 0.6;
+    public final static double GLYPH2_CLOSED = 0.2;
+    public final static double GLYPH3_CLOSED = 0.7;
+    public final static double GLYPH4_CLOSED = 0.3;
 
 
     /* Local OpMode members. */
@@ -126,6 +126,8 @@ public class HardwareRadabot
         plateDrive = hwMap.get(DcMotor.class, "plate_Drive");
 
         lift = hwMap.get(DcMotor.class, "lift");
+
+        relic = hwMap.get(DcMotor.class, "relic");
         // Set all motors to zero power
         leftFrontDrive.setPower(0);
         leftBackDrive.setPower(0);
