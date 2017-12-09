@@ -65,7 +65,10 @@ public class HardwareRadabot
     public Servo jewelServoRed = null;
     public Servo glyphServo1 = null;
     public Servo glyphServo2 = null;
+    public Servo glyphServo3 = null;
+    public Servo glyphServo4 = null;
     public DcMotor  lift = null;
+    public DcMotor relic = null;
 
     //servo start position/end position
     //this is to initialize the end and start position of the jewel servo fairly self explanatory
@@ -78,10 +81,16 @@ public class HardwareRadabot
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.1;
     public final static double GLYPH2_START = 0.8;
+    public final static double GLYPH3_START = 0.1;
+    public final static double GLYPH4_START = 0.8;
     public final static double GLYPH1_OPEN = 0.4;
     public final static double GLYPH2_OPEN = 0.5;
+    public final static double GLYPH3_OPEN = 0.4;
+    public final static double GLYPH4_OPEN = 0.5;
     public final static double GLYPH1_CLOSED = 0.8;
     public final static double GLYPH2_CLOSED = 0.1;
+    public final static double GLYPH3_CLOSED = 0.8;
+    public final static double GLYPH4_CLOSED = 0.1;
 
 
     /* Local OpMode members. */
@@ -91,7 +100,8 @@ public class HardwareRadabot
     /* Public OpMode members. */
     public double threshold1 = 0.1;
     public double threshold2 = -0.1;
-    // bLedOn represents the state of the glyph claw.
+
+    // glyphState represents the state of the glyph claw.
     boolean glyphState = true;
 
     /* Constructor */
@@ -108,6 +118,7 @@ public class HardwareRadabot
         leftBackDrive = hwMap.get(DcMotor.class, "left_Back_Drive");
         rightBackDrive = hwMap.get(DcMotor.class, "right_Back_Drive");
         rightFrontDrive = hwMap.get(DcMotor.class, "right_Front_Drive");
+
         //this sets the left side to go the reverse direction because of how the motors are set up.
         rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -121,6 +132,7 @@ public class HardwareRadabot
         rightFrontDrive.setPower(0);
         rightBackDrive.setPower(0);
         plateDrive.setPower(0);
+        relic.setPower(0);
 
 
         // RUN_USING_ENCODERS on drivetrain.
@@ -138,6 +150,10 @@ public class HardwareRadabot
         glyphServo1.setPosition(GLYPH1_START);
         glyphServo2 = hwMap.get(Servo.class, "glyph2");
         glyphServo2.setPosition(GLYPH2_START);
+        glyphServo3 = hwMap.get(Servo.class, "glyph3");
+        glyphServo3.setPosition(GLYPH3_START);
+        glyphServo4 = hwMap.get(Servo.class, "glyph4");
+        glyphServo4.setPosition(GLYPH4_START);
 
 
 
@@ -147,6 +163,8 @@ public class HardwareRadabot
         {
             glyphServo1.setPosition(GLYPH1_OPEN);
             glyphServo2.setPosition(GLYPH2_OPEN);
+            glyphServo3.setPosition(GLYPH3_OPEN);
+            glyphServo4.setPosition(GLYPH4_OPEN);
             glyphState = true;
         }
 
@@ -155,6 +173,8 @@ public class HardwareRadabot
         {
             glyphServo1.setPosition(GLYPH1_CLOSED);
             glyphServo2.setPosition(GLYPH2_CLOSED);
+            glyphServo3.setPosition(GLYPH3_CLOSED);
+            glyphServo4.setPosition(GLYPH4_CLOSED);
             glyphState = false;
         }
 
