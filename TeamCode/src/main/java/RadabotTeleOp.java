@@ -85,7 +85,7 @@ public class RadabotTeleOp extends LinearOpMode {
             robot.lift.setPower(gamepad2.left_stick_y);
 
             // control plate drive using gamepad2 right stick
-            robot.plateDrive.setPower(-gamepad2.right_stick_x/2.5);
+            robot.plateDrive.setPower(-gamepad2.right_stick_x/1.5);
 
             /* run the close claw method(if claw is open) when gamepad1 right trigger is pushed */
            if(robot.glyphState && (Math.abs(gamepad2.left_trigger)>robot.threshold1)){
@@ -106,10 +106,13 @@ public class RadabotTeleOp extends LinearOpMode {
             {
                 robot.relic.setPower(0.9);
             }
-
-            if(gamepad2.b = true)
+            else if(gamepad2.b = true)
             {
                 robot.relic.setPower(-0.9);
+            }
+            else
+            {
+                robot.relic.setPower(0.0);
             }
 
         }

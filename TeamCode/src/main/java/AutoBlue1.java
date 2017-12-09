@@ -33,7 +33,7 @@ public class AutoBlue1 extends LinearOpMode {
         int plateTarget1 = robot.plateDrive.getCurrentPosition() - 2200;
 
         waitForStart();
-
+        sleep(250);
         //drop the servo arm (with color sensor)
         robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_DETECT);
         telemetry.addData("I'm working:", "yep!");
