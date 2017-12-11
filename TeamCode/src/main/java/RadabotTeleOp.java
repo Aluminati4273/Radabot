@@ -53,7 +53,8 @@ public class RadabotTeleOp extends LinearOpMode {
     public void runOpMode() {
         double left;
         double right;
-
+        boolean relicExtend = false;
+        boolean relicExtract = false;
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
@@ -70,8 +71,8 @@ public class RadabotTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-            left = -gamepad1.left_stick_y;
-            right = -gamepad1.right_stick_y;
+            left = -gamepad1.left_stick_y/1.5;
+            right = -gamepad1.right_stick_y/1.51;
 
             // left drive for robot using gamepad1 sticks (tank drive)
             robot.leftFrontDrive.setPower(left);
@@ -85,7 +86,8 @@ public class RadabotTeleOp extends LinearOpMode {
             robot.lift.setPower(gamepad2.left_stick_y);
 
             // control plate drive using gamepad2 right stick
-            robot.plateDrive.setPower(-gamepad2.right_stick_x/1.5);
+            robot.plateDrive.setPower(-gamepad2.right_stick_x/2.0);
+
 
             /* run the close claw method(if claw is open) when gamepad1 right trigger is pushed */
            if(robot.glyphState && (Math.abs(gamepad2.left_trigger)>robot.threshold1)){
@@ -102,20 +104,20 @@ public class RadabotTeleOp extends LinearOpMode {
                 telemetry.update();
             }
 
-            if(gamepad2.a = true)
+
+            //control for the relic extension arm
+            while (gamepad2.a)
             {
                 robot.relic.setPower(0.9);
             }
-            else if(gamepad2.b = true)
+            while (gamepad2.b)
             {
                 robot.relic.setPower(-0.9);
             }
-            else
+            if(!gamepad2.a || !gamepad2.b)
             {
                 robot.relic.setPower(0.0);
             }
-
         }
-
     }
 }

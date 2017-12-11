@@ -83,10 +83,10 @@ public class HardwareRadabot
     public final static double GLYPH2_START = 0.0;
     public final static double GLYPH3_START = 0.85;
     public final static double GLYPH4_START = 0.1;
-    public final static double GLYPH1_OPEN = 0.15;
-    public final static double GLYPH2_OPEN = 0.5;
-    public final static double GLYPH3_OPEN = 0.25;
-    public final static double GLYPH4_OPEN = 0.675;
+    public final static double GLYPH1_OPEN = 0.05;
+    public final static double GLYPH2_OPEN = 0.6;
+    public final static double GLYPH3_OPEN = 0.15;
+    public final static double GLYPH4_OPEN = 0.775;
     public final static double GLYPH1_CLOSED = 0.6;
     public final static double GLYPH2_CLOSED = 0.2;
     public final static double GLYPH3_CLOSED = 0.7;
