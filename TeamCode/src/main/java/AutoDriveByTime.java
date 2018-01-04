@@ -72,10 +72,10 @@ public class AutoDriveByTime extends LinearOpMode {
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
         // Step 1:  Drive forward for 3 seconds
-        robot.leftBackDrive.setPower(0.2);
-        robot.leftFrontDrive.setPower(0.2);
-        robot.rightFrontDrive.setPower(1.0);
-        robot.rightFrontDrive.setPower(1.0);
+        robot.leftBackDrive.setPower(FORWARD_SPEED);
+        robot.leftFrontDrive.setPower(FORWARD_SPEED);
+        robot.rightFrontDrive.setPower(FORWARD_SPEED);
+        robot.rightFrontDrive.setPower(FORWARD_SPEED);
         runtime.reset();
         while (opModeIsActive() && (runtime.seconds() < 2)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());

@@ -65,7 +65,7 @@ public class RadabotRegisterOpModes
         manager.register ("VuMark", VuMark.class);
         manager.register("RadabotTeleOp", RadabotTeleOp.class);
         manager.register("AutoDriveByTime",AutoDriveByTime.class);
-
+        //Coding makes me contemplate my existence
         manager.register("ColorCheck",ColorCheck.class);
         manager.register("MRI_Color_Sensors", MRI_Color_Sensors.class);
         manager.register("DriveByEncoder",DriveByEncoder.class);

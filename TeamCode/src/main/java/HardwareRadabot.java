@@ -67,8 +67,11 @@ public class HardwareRadabot
     public Servo glyphServo2 = null;
     public Servo glyphServo3 = null;
     public Servo glyphServo4 = null;
+   // public Servo relicClaw = null;
+ //   public Servo relicGrabber = null;
     public DcMotor  lift = null;
     public DcMotor relic = null;
+
 
     //servo start position/end position
     //this is to initialize the end and start position of the jewel servo fairly self explanatory
@@ -77,7 +80,11 @@ public class HardwareRadabot
     public final static double JEWEL_SERVO_RED_START = 1.0;
     public final static double JEWEL_SERVO_BLUE_DETECT = 0.95;
     public final static double JEWEL_SERVO_RED_DETECT = 0.05;
-
+    //setting the stop positions to 0.50 because a continuous servo always thinks it is centered
+    //might need to adjust this later
+    // someone kill 4273 programmer
+   // public final static double RELIC_CLAW_STOP = 0.50;
+   // public final static double RELIC_GRABBER_STOP = 0.50;
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.8;
     public final static double GLYPH2_START = 0.0;
@@ -156,7 +163,7 @@ public class HardwareRadabot
         glyphServo3.setPosition(GLYPH3_START);
         glyphServo4 = hwMap.get(Servo.class, "glyph4");
         glyphServo4.setPosition(GLYPH4_START);
-
+       // relicClaw.setPosition(RELIC_CLAW_STOP);
 
 
     }
@@ -169,7 +176,7 @@ public class HardwareRadabot
             glyphServo4.setPosition(GLYPH4_OPEN);
             glyphState = true;
         }
-
+            //Why does God put us on Earth? Is it just to suffer?
         //method for closing claw
         public void closeClaw()
         {

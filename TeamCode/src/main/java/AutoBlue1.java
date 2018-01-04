@@ -39,6 +39,7 @@ public class AutoBlue1 extends LinearOpMode {
         telemetry.addData("I'm working:", "yep!");
         telemetry.update();
         sleep(250);
+        //The suffering never ends. You just become numb to the pain.
 
         // Turn On RUN_TO_POSITION for plate motor, set power, and run to position
         robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);

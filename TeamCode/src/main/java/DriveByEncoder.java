@@ -32,6 +32,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.util.ElapsedTime;
 //
 
@@ -44,7 +45,7 @@ public class DriveByEncoder extends LinearOpMode {
     private ElapsedTime     runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = .78 ;     // This is < 1.0 if geared UP (PicoBox Duo has 1:0.78, 1:1, and 1:1.28 ratios)
+    static final double     DRIVE_GEAR_REDUCTION    = 0.78 ;     // This is < 1.0 if geared UP (PicoBox Duo has 1:0.78, 1:1, and 1:1.28 ratios)
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.14159);
     static final double     DRIVE_SPEED             = 0.9;
@@ -86,24 +87,67 @@ public class DriveByEncoder extends LinearOpMode {
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
+        double inchDistance = COUNTS_PER_INCH * 5;
+
         waitForStart();
 
-        // Step through each leg of the path,
-        // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  1,  1, 5.0);  // S1: Forward 90 Inches with 5 Sec timeout
-        telemetry.addData("DriveForward", "90");
-        telemetry.update();
-        telemetry.addData("MotorPosition", robot.leftFrontDrive.getCurrentPosition());
-        telemetry.update();
-        sleep(500);
-        encoderDrive(TURN_SPEED,   10,  -10, 4.0);  // S2: Turn Right 10 Inches with 4 Sec timeout
-        telemetry.addData("Turn", "Now");
-        telemetry.update();
-        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
-        telemetry.addData("DriveBackward", "Now");
-        telemetry.update();
-        telemetry.addData("Path", "Complete");
-        telemetry.update();
+                robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+                robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                robot.leftFrontDrive.getCurrentPosition();
+                robot.leftBackDrive.getCurrentPosition();
+                robot.rightFrontDrive.getCurrentPosition();
+                robot.rightBackDrive.getCurrentPosition();
+
+                robot.leftFrontDrive.setTargetPosition((int)inchDistance);
+                robot.leftBackDrive.setTargetPosition((int)inchDistance);
+                robot.rightFrontDrive.setTargetPosition((int)inchDistance);
+                robot.rightBackDrive.setTargetPosition((int)inchDistance);
+
+                robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+                robot.rightFrontDrive.setPower(0.8);
+                robot.leftFrontDrive.setPower(0.8);
+                robot.rightBackDrive.setPower(0.8);
+                robot.leftBackDrive.setPower(0.8);
+
+                boolean isItBusy = false;
+                if(robot.leftFrontDrive.isBusy())
+                {
+                    isItBusy = true;
+                }
+                if(robot.rightFrontDrive.isBusy())
+                {
+                    isItBusy = true;
+                }
+                if(robot.leftBackDrive.isBusy())
+                {
+                    isItBusy = true;
+                }
+                if(robot.rightBackDrive.isBusy())
+                {
+                    isItBusy = true;
+                }
+
+                while (isItBusy)
+                {
+                    telemetry.update();
+                }
+        robot.rightFrontDrive.setPower(0.0);
+        robot.rightBackDrive.setPower(0.0);
+        robot.leftFrontDrive.setPower(0.0);
+        robot.rightBackDrive.setPower(0.0);
+
     }
 
     /*
@@ -142,6 +186,7 @@ public class DriveByEncoder extends LinearOpMode {
             // reset the timeout time and start motion.
             runtime.reset();
             robot.leftBackDrive.setPower(Math.abs(speed));
+            //How long until someone notices me? I do not know how long you have been here
             robot.leftFrontDrive.setPower(Math.abs(speed));
             robot.rightBackDrive.setPower(Math.abs(speed));
             robot.rightFrontDrive.setPower(Math.abs(speed));
@@ -155,7 +200,7 @@ public class DriveByEncoder extends LinearOpMode {
             */
 
             // Radabot has four drive motors. This code only uses two of them for the while loop monitoring
-            while (opModeIsActive() && (robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy())){
+         /*   while (opModeIsActive() && (robot.leftFrontDrive.isBusy() || robot.rightFrontDrive.isBusy())){
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget, newLeftTarget1,  newRightTarget, newRightTarget1);
@@ -166,6 +211,7 @@ public class DriveByEncoder extends LinearOpMode {
                         robot.rightBackDrive.getCurrentPosition());
                 telemetry.update();
             }
+            */
 
             // Stop all motion;
             robot.leftBackDrive.setPower(0);

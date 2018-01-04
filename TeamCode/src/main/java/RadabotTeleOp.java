@@ -45,7 +45,7 @@ public class RadabotTeleOp extends LinearOpMode {
 
 
     /* Declare OpMode members. */
-    HardwareRadabot   robot = new HardwareRadabot();           // Use Hardware from HardwareRadabot
+    HardwareRadabot robot = new HardwareRadabot();           // Use Hardware from HardwareRadabot
 
     // Declare
 
@@ -53,8 +53,9 @@ public class RadabotTeleOp extends LinearOpMode {
     public void runOpMode() {
         double left;
         double right;
-        boolean relicExtend = false;
-        boolean relicExtract = false;
+        double leftHalved;
+        double rightHalved;
+
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
@@ -71,8 +72,11 @@ public class RadabotTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-            left = -gamepad1.left_stick_y/1.5;
-            right = -gamepad1.right_stick_y/1.51;
+            left = -gamepad1.left_stick_y / 1.5;
+            right = -gamepad1.right_stick_y / 1.5;
+            leftHalved = left / 2;
+            rightHalved = right / 2;
+
 
             // left drive for robot using gamepad1 sticks (tank drive)
             robot.leftFrontDrive.setPower(left);
@@ -84,40 +88,40 @@ public class RadabotTeleOp extends LinearOpMode {
 
             // lift up using gamepad2 left stick
             robot.lift.setPower(gamepad2.left_stick_y);
-
+            //Will I ever be found?
             // control plate drive using gamepad2 right stick
-            robot.plateDrive.setPower(-gamepad2.right_stick_x/2.0);
+            robot.plateDrive.setPower(-gamepad2.right_stick_x / 2.0);
 
 
             /* run the close claw method(if claw is open) when gamepad1 right trigger is pushed */
-           if(robot.glyphState && (Math.abs(gamepad2.left_trigger)>robot.threshold1)){
-               robot.closeClaw();
-               telemetry.addData("Claw Position","CLOSED");
-               telemetry.update();
-           }
+            if (robot.glyphState && (Math.abs(gamepad2.left_trigger) > robot.threshold1)) {
+                robot.closeClaw();
+                telemetry.addData("Claw Position", "CLOSED");
+                telemetry.update();
+            }
 
             /* run the open claw method(if claw is closed) when gamepad1 left trigger is pushed */
-            if(!robot.glyphState && ((Math.abs(gamepad2.right_trigger)>robot.threshold1)))
-            {
+            if (!robot.glyphState && ((Math.abs(gamepad2.right_trigger) > robot.threshold1))) {
                 robot.openClaw();
-                telemetry.addData("Claw Position","OPEN");
+                telemetry.addData("Claw Position", "OPEN");
                 telemetry.update();
             }
 
 
             //control for the relic extension arm
-            while (gamepad2.a)
-            {
+            while (gamepad2.a) {
                 robot.relic.setPower(0.9);
             }
-            while (gamepad2.b)
-            {
+            while (gamepad2.b) {
                 robot.relic.setPower(-0.9);
             }
-            if(!gamepad2.a || !gamepad2.b)
-            {
+            if (!gamepad2.a || !gamepad2.b) {
                 robot.relic.setPower(0.0);
             }
+
+
         }
     }
 }
+//the programmer needs to die
+//and wants to
