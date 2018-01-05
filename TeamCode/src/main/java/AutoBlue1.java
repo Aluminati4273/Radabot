@@ -29,8 +29,8 @@ public class AutoBlue1 extends LinearOpMode {
         //set plate motor to run using encoder
         //robot.plateDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        int plateTarget = robot.plateDrive.getCurrentPosition() + 2200;
-        int plateTarget1 = robot.plateDrive.getCurrentPosition() - 2200;
+       // int plateTarget = robot.plateDrive.getCurrentPosition() + 2200;
+       // int plateTarget1 = robot.plateDrive.getCurrentPosition() - 2200;
 
         waitForStart();
         sleep(250);
@@ -40,8 +40,17 @@ public class AutoBlue1 extends LinearOpMode {
         telemetry.update();
         sleep(250);
         //The suffering never ends. You just become numb to the pain.
-
+        //Set the value of the plateDrive power on the Hardware page so it is consistent between each Autonomous code
+        robot.plateDrive.setPower(robot.platePower);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 0.1)) {
+            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+        telemetry.update();
+        sleep(1000);
         // Turn On RUN_TO_POSITION for plate motor, set power, and run to position
+       /*
         robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.plateDrive.setTargetPosition(plateTarget);
         robot.plateDrive.setPower(0.7);
@@ -73,7 +82,7 @@ public class AutoBlue1 extends LinearOpMode {
         //else if color sensor is red, drive backward
 
 
-        //retract plate slide using encoder and motor position
+        /*retract plate slide using encoder and motor position
         robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.plateDrive.setTargetPosition(plateTarget1);
         robot.plateDrive.setPower(0.7);
@@ -87,6 +96,7 @@ public class AutoBlue1 extends LinearOpMode {
             telemetry.addData("PlateDrive motor position ",  robot.plateDrive.getCurrentPosition());
             telemetry.update();
         }
+        */
 
         /*
          * // Move plate drive by time and power (bad idea)

@@ -99,6 +99,8 @@ public class HardwareRadabot
     public final static double GLYPH3_CLOSED = 0.7;
     public final static double GLYPH4_CLOSED = 0.3;
 
+    public final static double platePower = 0.5;
+
 
     /* Local OpMode members. */
     HardwareMap hwMap  = null;

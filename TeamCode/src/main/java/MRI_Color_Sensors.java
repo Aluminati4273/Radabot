@@ -36,15 +36,14 @@ public class MRI_Color_Sensors extends OpMode {
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
 
-    byte[] colorAcache;
-    byte[] colorCcache;
+    byte[] colorRedCache;
+    byte[] colorBlueCache;
 
-    I2cDevice colorA;
-    I2cDevice colorC;
-    I2cDeviceSynch colorAreader;
-    I2cDeviceSynch colorCreader;
+    I2cDevice colorRed;
+    I2cDevice colorBlue;
+    I2cDeviceSynch colorRedReader;
+    I2cDeviceSynch colorBlueReader;
 
-    TouchSensor touch;         //Instance of TouchSensor - for changing color sensor mode
 
     boolean LEDState = true;     //Tracks the mode of the color sensor; Active = true, Passive = false
 
@@ -56,16 +55,16 @@ public class MRI_Color_Sensors extends OpMode {
         telemetry.addData("Status", "Initialized");
 
         //the below lines set up the configuration file
-        colorA = hardwareMap.i2cDevice.get("ca");
-        colorC = hardwareMap.i2cDevice.get("cc");
+        colorRed = hardwareMap.i2cDevice.get("colorRed");
+        colorRed = hardwareMap.i2cDevice.get("colorBlue");
 
-        colorAreader = new I2cDeviceSynchImpl(colorA, I2cAddr.create8bit(0x3a), false);
-        colorCreader = new I2cDeviceSynchImpl(colorC, I2cAddr.create8bit(0x3c), false);
+        colorRedReader = new I2cDeviceSynchImpl(colorRed, I2cAddr.create8bit(0x3a), false);
+        colorBlueReader = new I2cDeviceSynchImpl(colorBlue, I2cAddr.create8bit(0x3c), false);
 
-        colorAreader.engage();
-        colorCreader.engage();
+        colorRedReader.engage();
+        colorBlueReader.engage();
 
-        touch = hardwareMap.touchSensor.get("t");
+
     }
 
     /*
@@ -83,12 +82,12 @@ public class MRI_Color_Sensors extends OpMode {
         runtime.reset();
 
         if(LEDState){
-            colorAreader.write8(3, 0);    //Set the mode of the color sensor using LEDState
-            colorCreader.write8(3, 0);    //Set the mode of the color sensor using LEDState
+            colorRedReader.write8(3, 0);    //Set the mode of the color sensor using LEDState
+            colorBlueReader.write8(3, 0);    //Set the mode of the color sensor using LEDState
         }
         else{
-            colorAreader.write8(3, 1);    //Set the mode of the color sensor using LEDState
-            colorCreader.write8(3, 1);    //Set the mode of the color sensor using LEDState
+            colorRedReader.write8(3, 1);    //Set the mode of the color sensor using LEDState
+            colorBlueReader.write8(3, 1);    //Set the mode of the color sensor using LEDState
         }
         //Active - For measuring reflected light. Cancels out ambient light
         //Passive - For measuring ambient light, eg. the FTC Color Beacon
@@ -102,15 +101,15 @@ public class MRI_Color_Sensors extends OpMode {
         telemetry.addData("Status", "Running: " + runtime.toString());
 
 
-        colorAcache = colorAreader.read(0x04, 1);
-        colorCcache = colorCreader.read(0x04, 1);
+        colorRedCache = colorRedReader.read(0x04, 1);
+        colorBlueCache = colorBlueReader.read(0x04, 1);
 
         //display values
-        telemetry.addData("1 #A", colorAcache[0] & 0xFF);
-        telemetry.addData("2 #C", colorCcache[0] & 0xFF);
+        telemetry.addData("1 #A", colorRedCache[0] & 0xFF);
+        telemetry.addData("2 #C", colorBlueCache[0] & 0xFF);
 
-        telemetry.addData("3 A", colorAreader.getI2cAddress().get8Bit());
-        telemetry.addData("4 A", colorCreader.getI2cAddress().get8Bit());
+        telemetry.addData("3 A", colorRedReader.getI2cAddress().get8Bit());
+        telemetry.addData("4 A", colorBlueReader.getI2cAddress().get8Bit());
     }
 
     /*
