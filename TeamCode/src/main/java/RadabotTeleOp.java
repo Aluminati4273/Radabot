@@ -30,6 +30,7 @@
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwareK9bot;
@@ -53,8 +54,7 @@ public class RadabotTeleOp extends LinearOpMode {
     public void runOpMode() {
         double left;
         double right;
-        double leftHalved;
-        double rightHalved;
+
 
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
@@ -67,15 +67,13 @@ public class RadabotTeleOp extends LinearOpMode {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-
+        
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
             left = -gamepad1.left_stick_y / 1.5;
             right = -gamepad1.right_stick_y / 1.5;
-            leftHalved = left / 2;
-            rightHalved = right / 2;
 
 
             // left drive for robot using gamepad1 sticks (tank drive)
@@ -90,7 +88,7 @@ public class RadabotTeleOp extends LinearOpMode {
             robot.lift.setPower(gamepad2.left_stick_y);
             //Will I ever be found?
             // control plate drive using gamepad2 right stick
-            robot.plateDrive.setPower(-gamepad2.right_stick_x / 2.0);
+            robot.plateDrive.setPower(-gamepad2.right_stick_x / 4.0);
 
 
             /* run the close claw method(if claw is open) when gamepad1 right trigger is pushed */
@@ -118,6 +116,28 @@ public class RadabotTeleOp extends LinearOpMode {
             if (!gamepad2.a || !gamepad2.b) {
                 robot.relic.setPower(0.0);
             }
+
+
+            //This is to allow the driver to adjust precisely for
+            /*
+            if (gamepad2.dpad_down && gamepad2.right_trigger < robot.threshold1)
+            {
+                robot.glyphServo1.setPosition(robot.glyphServo1.getPosition() + 0.05);
+                robot.glyphServo2.setPosition(robot.glyphServo2.getPosition() - 0.05);
+                robot.glyphServo3.setPosition(robot.glyphServo3.getPosition() + 0.05);
+                robot.glyphServo4.setPosition(robot.glyphServo4.getPosition() - 0.05);
+
+            }
+
+            if (gamepad2.dpad_up && gamepad2.left_trigger < robot.threshold1)
+            {
+                robot.glyphServo1.setPosition(robot.glyphServo1.getPosition() - 0.05);
+                robot.glyphServo2.setPosition(robot.glyphServo2.getPosition() + 0.05);
+                robot.glyphServo3.setPosition(robot.glyphServo3.getPosition() - 0.05);
+                robot.glyphServo4.setPosition(robot.glyphServo4.getPosition() + 0.05);
+
+            }
+                */
 
 
         }

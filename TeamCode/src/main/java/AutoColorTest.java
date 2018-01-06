@@ -29,6 +29,7 @@ public class AutoColorTest extends LinearOpMode {
 
 
         waitForStart();
+
         {
 
             //Turn on LED of Color Sensors (both)
@@ -42,18 +43,15 @@ public class AutoColorTest extends LinearOpMode {
                 telemetry.addLine();
                 telemetry.addData("Red Color Number", robot.redColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER));
                 telemetry.update();
-
-
             }
 
             //check color on sensor
+
+
             //if color sensor is blue, drive forward
-           if (robot.redColorNumber < 4 && robot.redColorNumber >2)
+           //if (robot.blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER))
             {
-                robot.leftFrontDrive.setPower(1.0);
-                robot.leftBackDrive.setPower(1.0);
-                robot.rightFrontDrive.setPower(1.0);
-                robot.rightBackDrive.setPower(1.0);
+
             }
 
 

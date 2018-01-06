@@ -79,7 +79,7 @@ public class HardwareRadabot
     //this is to initialize the end and start position of the jewel servo fairly self explanatory
     // set all locations and positions for jewel servos
     public final static double JEWEL_SERVO_BLUE_START = 0.0;
-    public final static double JEWEL_SERVO_RED_START = 1.0;
+    public final static double JEWEL_SERVO_RED_START = 0.95;
     public final static double JEWEL_SERVO_BLUE_DETECT = 0.95;
     public final static double JEWEL_SERVO_RED_DETECT = 0.05;
     //setting the stop positions to 0.50 because a continuous servo always thinks it is centered
@@ -92,10 +92,10 @@ public class HardwareRadabot
     public final static double GLYPH2_START = 0.0;
     public final static double GLYPH3_START = 0.85;
     public final static double GLYPH4_START = 0.1;
-    public final static double GLYPH1_OPEN = 0.05;
-    public final static double GLYPH2_OPEN = 0.6;
-    public final static double GLYPH3_OPEN = 0.15;
-    public final static double GLYPH4_OPEN = 0.775;
+    public final static double GLYPH1_OPEN = 0.24;
+    public final static double GLYPH2_OPEN = 0.44;
+    public final static double GLYPH3_OPEN = 0.32;
+    public final static double GLYPH4_OPEN = 0.7;
     public final static double GLYPH1_CLOSED = 0.6;
     public final static double GLYPH2_CLOSED = 0.2;
     public final static double GLYPH3_CLOSED = 0.7;
