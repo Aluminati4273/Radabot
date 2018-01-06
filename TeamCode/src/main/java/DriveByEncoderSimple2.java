@@ -78,18 +78,51 @@ public class DriveByEncoderSimple2 extends LinearOpMode {
         telemetry.update();
 
 
+        //stop and reset encoder on plate drive motor
+        robot.plateDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //set plate drive motor to run using encoder
+        robot.plateDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
         waitForStart();
 
 
         driveForwardDistance(1.0,1500);
         sleep(1000);
-        turnLeftDistance(1.0,375);
+        turnLeftDistance(1.0,700);
         sleep(2000);
-        turnRightDistance(1.0, 375);
+        redPlateDistance(.6, 100);
         sleep(1000);
 
 
 
+    }
+
+    public void redPlateDistance( double power, int distance)
+    {
+        //reset encoder
+        robot.plateDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //set target position
+        robot.plateDrive.setTargetPosition(distance);
+
+        //set to run to position mode
+        robot.plateDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //set drive power
+        robot.plateDrive.setPower(power);
+
+        while(robot.plateDrive.isBusy())
+        {
+            //wait for motor to reach position
+        }
+
+        //stop motor
+        robot.plateDrive.setPower(0);
+
+        //reset encoder
+        robot.plateDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public void turnRightDistance (double power, int distance)
