@@ -32,6 +32,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.sun.tools.javac.tree.DCTree;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 
 /**
  * This is NOT an opmode.
@@ -71,6 +72,8 @@ public class HardwareRadabot
  //   public Servo relicGrabber = null;
     public DcMotor  lift = null;
     public DcMotor relic = null;
+    public ModernRoboticsI2cColorSensor redColor = null;
+    public ModernRoboticsI2cColorSensor blueColor = null;
 
 
     //servo start position/end position
@@ -121,6 +124,10 @@ public class HardwareRadabot
     public void init(HardwareMap ahwMap) {
         // save reference to HW Map
         hwMap = ahwMap;
+
+        //Initialize two color sensors for jewels
+        blueColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "blueColor");
+        redColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "redColor");
 
         // Define and Initialize Motors
         leftFrontDrive = hwMap.get(DcMotor.class, "left_Front_Drive");
