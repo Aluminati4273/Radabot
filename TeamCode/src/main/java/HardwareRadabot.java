@@ -38,7 +38,6 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
  * This is NOT an opmode.
  *
  * This class can be used to define all the specific hardware for a single robot.
- * In this case that robot is a K9 robot.
  *
  * This hardware class assumes the following device names have been configured on the robot:
  * Note:  All names are lower case and some have single spaces between words.
@@ -69,7 +68,7 @@ public class HardwareRadabot
     public Servo glyphServo3 = null;
     public Servo glyphServo4 = null;
    // public Servo relicClaw = null;
- //   public Servo relicGrabber = null;
+ //   public Servo relicLift = null;
     public DcMotor  lift = null;
     public DcMotor relic = null;
     public ModernRoboticsI2cColorSensor redColor = null;
@@ -87,7 +86,7 @@ public class HardwareRadabot
     //might need to adjust this later
     // someone kill 4273 programmer
    // public final static double RELIC_CLAW_STOP = 0.50;
-   // public final static double RELIC_GRABBER_STOP = 0.50;
+   // public final static double RELIC_LIFT_STOP = 0.50;
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.8;
     public final static double GLYPH2_START = 0.0;
@@ -103,6 +102,9 @@ public class HardwareRadabot
     public final static double GLYPH4_CLOSED = 0.3;
 
     public final static double platePower = 0.5;
+
+    public static int redColorNumber;
+    public static int blueColorNumber;
 
 
     /* Local OpMode members. */
@@ -128,6 +130,10 @@ public class HardwareRadabot
         //Initialize two color sensors for jewel sensing
         blueColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "blueColor");
         redColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "redColor");
+
+        // Set a variable for the current Color Number
+        redColorNumber = redColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER);
+        blueColorNumber = blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER);
 
 
         // Define and Initialize Motors
