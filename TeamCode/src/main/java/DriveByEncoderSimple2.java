@@ -83,6 +83,9 @@ public class DriveByEncoderSimple2 extends LinearOpMode {
         while(opModeIsActive())
         {
             driveForwardDistance(1.0,3000);
+            sleep(1000);
+            driveForwardDistance(1.0, 5000);
+            robot.closeClaw();
         }
     }
 
