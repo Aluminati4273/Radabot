@@ -83,9 +83,9 @@ public class DriveByEncoderSimple2 extends LinearOpMode {
 
         driveForwardDistance(1.0,1500);
         sleep(1000);
-        turnLeftDistance(1.0,750);
+        turnLeftDistance(1.0,375);
         sleep(2000);
-        turnRightDistance(1.0, 1000);
+        turnRightDistance(1.0, 375);
         sleep(1000);
 
 
