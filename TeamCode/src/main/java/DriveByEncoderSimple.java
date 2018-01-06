@@ -35,7 +35,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 //
 
 
-@Autonomous(name="DriveByEncoder", group="Auto")
+@Autonomous(name="DriveByEncoderSimple", group="Auto")
 public class DriveByEncoderSimple extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -81,41 +81,29 @@ public class DriveByEncoderSimple extends LinearOpMode {
 
         waitForStart();
 
-        robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        while(opModeIsActive())
+        {
+            robot.leftFrontDrive.setTargetPosition(150);
+            robot.leftBackDrive.setTargetPosition(150);
+            robot.rightFrontDrive.setTargetPosition(150);
+            robot.rightBackDrive.setTargetPosition(150);
 
-        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        robot.leftFrontDrive.getCurrentPosition();
-        robot.leftBackDrive.getCurrentPosition();
-        robot.rightFrontDrive.getCurrentPosition();
-        robot.rightBackDrive.getCurrentPosition();
+            robot.rightFrontDrive.setPower(0.8);
+            robot.leftFrontDrive.setPower(0.8);
+            robot.rightBackDrive.setPower(0.8);
+            robot.leftBackDrive.setPower(0.8);
 
-        robot.leftFrontDrive.setTargetPosition(150);
-        robot.leftBackDrive.setTargetPosition(150);
-        robot.rightFrontDrive.setTargetPosition(150);
-        robot.rightBackDrive.setTargetPosition(150);
-
-        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        robot.rightFrontDrive.setPower(0.8);
-        robot.leftFrontDrive.setPower(0.8);
-        robot.rightBackDrive.setPower(0.8);
-        robot.leftBackDrive.setPower(0.8);
-
-
-        robot.rightFrontDrive.setPower(0.0);
-        robot.rightBackDrive.setPower(0.0);
-        robot.leftFrontDrive.setPower(0.0);
-        robot.rightBackDrive.setPower(0.0);
+            telemetry.addData("Path0", "Starting at %7d :%7d",
+                    robot.leftFrontDrive.getCurrentPosition(),
+                    robot.leftBackDrive.getCurrentPosition(),
+                    robot.rightFrontDrive.getCurrentPosition(),
+                    robot.rightBackDrive.getCurrentPosition());
+            telemetry.update();
+        }
     }
-
 }
