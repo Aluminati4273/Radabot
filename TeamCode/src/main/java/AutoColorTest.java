@@ -24,8 +24,8 @@ public class AutoColorTest extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set color sensor I2C addresses
-        robot.blueColor.setI2cAddress(I2cAddr.create7bit(0x10));
-        robot.redColor.setI2cAddress(I2cAddr.create7bit(0x20));
+        robot.redColor.setI2cAddress(I2cAddr.create7bit(0x10));
+        robot.blueColor.setI2cAddress(I2cAddr.create7bit(0x20));
 
 
         waitForStart();
@@ -49,7 +49,7 @@ public class AutoColorTest extends LinearOpMode {
 
 
             //if color sensor is blue, drive forward
-            if (robot.redColorNumber < 4 && robot.redColorNumber >2)
+            while (robot.redColorNumber < 4 && robot.redColorNumber >2)
             {
                 robot.leftFrontDrive.setPower(1.0);
                 robot.leftBackDrive.setPower(1.0);
