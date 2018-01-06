@@ -35,8 +35,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 //
 
 
-@Autonomous(name="DriveByEncoderSimple", group="Auto")
-public class DriveByEncoderSimple extends LinearOpMode {
+@Autonomous(name="DriveByEncoderSimple2", group="Auto")
+public class DriveByEncoderSimple2 extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareRadabot robot = new HardwareRadabot();   // Use a Pushbot's hardware
@@ -130,3 +130,4 @@ public class DriveByEncoderSimple extends LinearOpMode {
         robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }
+
