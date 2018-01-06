@@ -41,7 +41,12 @@ public class DriveByEncoderSimple extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareRadabot robot = new HardwareRadabot();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
-
+    static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
+    static final double     DRIVE_GEAR_REDUCTION    = 0.78 ;     // This is < 1.0 if geared UP (PicoBox Duo has 1:0.78, 1:1, and 1:1.28 ratios)
+    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.14159);
+    static final double     DRIVE_SPEED             = 0.9;
+    static final double     TURN_SPEED              = 0.8;
 
 
     @Override
@@ -54,7 +59,7 @@ public class DriveByEncoderSimple extends LinearOpMode {
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Resetting Encoders");    //
+        telemetry.addData("Status", "Resetting Encoders");
         telemetry.update();
 
         //stop and reset encoders on all drive motors
@@ -78,15 +83,20 @@ public class DriveByEncoderSimple extends LinearOpMode {
                 robot.rightBackDrive.getCurrentPosition());
         telemetry.update();
 
-
+        int newLeftTarget1 = robot.leftBackDrive.getCurrentPosition() + (int)(48 * COUNTS_PER_INCH);
+       int newLeftTarget = robot.leftFrontDrive.getCurrentPosition() + (int)(48 * COUNTS_PER_INCH);
+       int newRightTarget1 = robot.rightBackDrive.getCurrentPosition() + (int)(48 * COUNTS_PER_INCH);
+       int newRightTarget = robot.rightBackDrive.getCurrentPosition() + (int)(48 * COUNTS_PER_INCH);
         waitForStart();
+
 
         while(opModeIsActive())
         {
-            robot.leftFrontDrive.setTargetPosition(150);
-            robot.leftBackDrive.setTargetPosition(150);
-            robot.rightFrontDrive.setTargetPosition(150);
-            robot.rightBackDrive.setTargetPosition(150);
+
+            robot.leftFrontDrive.setTargetPosition(newLeftTarget);
+            robot.leftBackDrive.setTargetPosition(newLeftTarget1);
+            robot.rightFrontDrive.setTargetPosition(newRightTarget);
+            robot.rightBackDrive.setTargetPosition(newRightTarget1);
 
             robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);

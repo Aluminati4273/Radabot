@@ -64,7 +64,11 @@ public class DriveByEncoder extends LinearOpMode {
         telemetry.addData("Status", "Resetting Encoders");    //
         telemetry.update();
 
-        //stop and reset encoders on all drive motors
+        encoderDrive(DRIVE_SPEED, 48, 48, 5.0);
+
+
+
+      /*  //stop and reset encoders on all drive motors
         robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -120,7 +124,7 @@ public class DriveByEncoder extends LinearOpMode {
                 robot.leftFrontDrive.setPower(0.8);
                 robot.rightBackDrive.setPower(0.8);
                 robot.leftBackDrive.setPower(0.8);
-
+*/
                 boolean isItBusy = false;
                 if(robot.leftFrontDrive.isBusy())
                 {
