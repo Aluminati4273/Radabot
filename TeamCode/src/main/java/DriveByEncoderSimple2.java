@@ -80,13 +80,57 @@ public class DriveByEncoderSimple2 extends LinearOpMode {
 
         waitForStart();
 
-        while(opModeIsActive())
+
+        driveForwardDistance(1.0,1500);
+        sleep(1000);
+        turnDistance(1.0,750);
+        sleep(2000);
+
+
+    }
+
+    public void turnDistance (double power, int distance)
+    {
+        // reset encoders
+        robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //set target position
+        robot.leftFrontDrive.setTargetPosition(-distance);
+        robot.leftBackDrive.setTargetPosition(-distance);
+        robot.rightFrontDrive.setTargetPosition(distance);
+        robot.rightBackDrive.setTargetPosition(distance);
+
+        //set to run to position mode
+        robot.leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //set drive power
+        robot.leftFrontDrive.setPower(power);
+        robot.leftBackDrive.setPower(power);
+        robot.rightFrontDrive.setPower(power);
+        robot.rightBackDrive.setPower(power);
+
+        while(robot.leftFrontDrive.isBusy() && robot.leftBackDrive.isBusy() && robot.rightFrontDrive.isBusy() && robot.rightBackDrive.isBusy())
         {
-            driveForwardDistance(1.0,3000);
-            sleep(1000);
-            driveForwardDistance(1.0, 5000);
-            robot.closeClaw();
+            //wait for motors to reach position
         }
+
+        //stop all motors
+        robot.leftFrontDrive.setPower(0);
+        robot.leftBackDrive.setPower(0);
+        robot.rightFrontDrive.setPower(0);
+        robot.rightBackDrive.setPower(0);
+
+        // reset encoders
+        robot.leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public void driveForwardDistance (double power, int distance)
