@@ -125,9 +125,10 @@ public class HardwareRadabot
         // save reference to HW Map
         hwMap = ahwMap;
 
-        //Initialize two color sensors for jewels
+        //Initialize two color sensors for jewel sensing
         blueColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "blueColor");
         redColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "redColor");
+
 
         // Define and Initialize Motors
         leftFrontDrive = hwMap.get(DcMotor.class, "left_Front_Drive");

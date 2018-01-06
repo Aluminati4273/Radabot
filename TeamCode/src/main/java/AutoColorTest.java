@@ -1,6 +1,7 @@
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -22,6 +23,9 @@ public class AutoColorTest extends LinearOpMode {
 
         robot.init(hardwareMap);
 
+        //Set color sensor I2C addresses
+        robot.blueColor.setI2cAddress(I2cAddr.create7bit(0x10));
+        robot.redColor.setI2cAddress(I2cAddr.create7bit(0x20));
 
 
         waitForStart();
@@ -35,6 +39,7 @@ public class AutoColorTest extends LinearOpMode {
             {
                 telemetry.addData("Blue Color Number", robot.blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER));
                 telemetry.update();
+                telemetry.addLine();
                 telemetry.addData("Red Color Number", robot.redColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER));
                 telemetry.update();
             }
@@ -43,7 +48,7 @@ public class AutoColorTest extends LinearOpMode {
 
 
             //if color sensor is blue, drive forward
-           // if (robot.blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER = ModernRoboticsI2cColorSensor.Register.BLUE))
+           //if (robot.blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER))
             {
 
             }
