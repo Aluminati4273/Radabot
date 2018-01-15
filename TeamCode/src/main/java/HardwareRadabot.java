@@ -53,6 +53,10 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
  */
 public class HardwareRadabot
 {
+
+
+
+
     /* Public OpMode members. */
     // set up the drive train, set = null that way it doesnt run
     // set up every motor/servo
@@ -75,12 +79,13 @@ public class HardwareRadabot
     public ModernRoboticsI2cColorSensor blueColor = null;
 
 
+
     //servo start position/end position
     //this is to initialize the end and start position of the jewel servo fairly self explanatory
     // set all locations and positions for jewel servos
     public final static double JEWEL_SERVO_BLUE_START = 0.0;
     public final static double JEWEL_SERVO_RED_START = 0.95;
-    public final static double JEWEL_SERVO_BLUE_DETECT = 0.95;
+    public final static double JEWEL_SERVO_BLUE_DETECT = 0.5;
     public final static double JEWEL_SERVO_RED_DETECT = 0.05;
     //setting the stop positions to 0.50 because a continuous servo always thinks it is centered
     //might need to adjust this later
@@ -90,8 +95,8 @@ public class HardwareRadabot
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.8;
     public final static double GLYPH2_START = 0.0;
-    public final static double GLYPH3_START = 0.85;
-    public final static double GLYPH4_START = 0.1;
+    public final static double GLYPH3_START = 0.1;
+    public final static double GLYPH4_START = 0.85;
     public final static double GLYPH1_OPEN = 0.24;
     public final static double GLYPH2_OPEN = 0.44;
     public final static double GLYPH3_OPEN = 0.32;
@@ -135,7 +140,7 @@ public class HardwareRadabot
         redColorNumber = redColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER);
         blueColorNumber = blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER);
 
-
+        blueColor.enableLed(true);
         // Define and Initialize Motors
         leftFrontDrive = hwMap.get(DcMotor.class, "left_Front_Drive");
         leftBackDrive = hwMap.get(DcMotor.class, "left_Back_Drive");
@@ -257,6 +262,7 @@ public class HardwareRadabot
         plateDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+    // method to move robot to turn to the right (two parameters)
     public void turnRightDistance (double power, int distance)
     {
         // reset encoders
@@ -301,6 +307,7 @@ public class HardwareRadabot
         rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+    // method to move robot to turn to the left (two parameters)
     public void turnLeftDistance (double power, int distance)
     {
         // reset encoders
@@ -345,6 +352,7 @@ public class HardwareRadabot
         rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+    //method to move the robot forward (two parameters)
     public void driveForwardDistance (double power, int distance)
     {
         // reset encoders
@@ -358,6 +366,51 @@ public class HardwareRadabot
         leftBackDrive.setTargetPosition(distance);
         rightFrontDrive.setTargetPosition(distance);
         rightBackDrive.setTargetPosition(distance);
+
+        //set to run to position mode
+        leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //set drive power
+        leftFrontDrive.setPower(power);
+        leftBackDrive.setPower(power);
+        rightFrontDrive.setPower(power);
+        rightBackDrive.setPower(power);
+
+        while(leftFrontDrive.isBusy() && leftBackDrive.isBusy() && rightFrontDrive.isBusy() && rightBackDrive.isBusy())
+        {
+            //wait for motors to reach position
+        }
+
+        //stop all motors
+        leftFrontDrive.setPower(0);
+        leftBackDrive.setPower(0);
+        rightFrontDrive.setPower(0);
+        rightBackDrive.setPower(0);
+
+        // reset encoders
+        leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    //method to move the robot backward (two parameters)
+    public void driveBackDistance (double power, int distance)
+    {
+        // reset encoders
+        leftBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBackDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //set target position
+        leftFrontDrive.setTargetPosition(-distance);
+        leftBackDrive.setTargetPosition(-distance);
+        rightFrontDrive.setTargetPosition(-distance);
+        rightBackDrive.setTargetPosition(-distance);
 
         //set to run to position mode
         leftBackDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);

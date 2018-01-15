@@ -36,36 +36,19 @@ public class AutoColorTest extends LinearOpMode {
             robot.redColor.enableLed(true);
             robot.blueColor.enableLed(true);
 
-            while (opModeIsActive())
-            {
-
-                telemetry.addLine();
-                telemetry.addData("Blue Color Number", robot.blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER));
-                telemetry.update();
-                telemetry.addLine();
-                telemetry.addData("Red Color Number", robot.redColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER));
-                telemetry.update();
-            }
-
             //check color on sensor
-
+            robot.redPlateDistance(.6, 500);
 
             //if color sensor is blue, drive forward
-            while (robot.redColorNumber < 4 && robot.redColorNumber >2)
+            if (robot.redColorNumber < 4 && robot.redColorNumber >2)
             {
-                robot.leftFrontDrive.setPower(1.0);
-                robot.leftBackDrive.setPower(1.0);
-                robot.rightFrontDrive.setPower(1.0);
-                robot.rightBackDrive.setPower(1.0);
+                robot.driveForwardDistance(0.6, 1500);
             }
 
             //if color sensor is red, drive backward
-            while(robot.redColorNumber <11 && robot.redColorNumber > 8)
+            if(robot.redColorNumber <11 && robot.redColorNumber > 8)
             {
-                robot.leftFrontDrive.setPower(-1.0);
-                robot.leftBackDrive.setPower(-1.0);
-                robot.rightFrontDrive.setPower(-1.0);
-                robot.rightBackDrive.setPower(-1.0);
+                robot.driveBackDistance(0.6, 1500);
             }
 
 

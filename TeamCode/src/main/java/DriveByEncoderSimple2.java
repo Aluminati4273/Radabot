@@ -88,13 +88,7 @@ public class DriveByEncoderSimple2 extends LinearOpMode {
         waitForStart();
 
 
-        robot.driveForwardDistance(1.0,1500);
-        sleep(1000);
-        robot.turnLeftDistance(1.0,700);
-        sleep(2000);
-        robot.redPlateDistance(.6, 700);
-        sleep(1000);
-        robot.bluePlateDistance(.6, 1400);
+        robot.driveForwardDistance(1.0,2600);
         sleep(1000);
 
 

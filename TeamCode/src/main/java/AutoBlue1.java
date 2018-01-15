@@ -2,6 +2,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -23,16 +24,36 @@ public class AutoBlue1 extends LinearOpMode {
 
         robot.init(hardwareMap);
 
+       // robot.redColor.setI2cAddress(I2cAddr.create7bit(0x10));
+        robot.blueColor.setI2cAddress(I2cAddr.create7bit(0x20));
+
         waitForStart();
 
         //The suffering never ends. You just become numb to the pain.
 
-        robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_DETECT);
-        robot.bluePlateDistance(.6,500);
-        sleep(500);
-        robot.driveForwardDistance(1.0,1000);
-        robot.bluePlateDistance(.6, -500);
-        robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_START);
+        robot.blueColor.enableLed(true);
+
+
+
+        robot.jewelServoBlue.setPosition(0.95);
+
+        robot.bluePlateDistance(0.5, 550);
+
+
+
+        if (robot.blueColorNumber < 4 && robot.blueColorNumber > 2)
+        {
+            robot.driveBackDistance(1.0, 700);
+        }
+
+        //if color sensor is blue, drive backward
+        if(robot.blueColorNumber < 11 && robot.blueColorNumber > 8)
+        {
+
+
+            robot.driveForwardDistance(1.0, 1500);
+        }
+
 
     }
 
