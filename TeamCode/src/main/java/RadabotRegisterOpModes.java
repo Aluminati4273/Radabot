@@ -36,8 +36,6 @@
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
 
-import org.firstinspires.ftc.teamcode.MRI_Color_Sensors;
-
 /**
  *
  * How it works:
@@ -64,11 +62,7 @@ public class RadabotRegisterOpModes
         // Our Team opmodes
         manager.register ("VuMark", VuMark.class);
         manager.register("RadabotTeleOp", RadabotTeleOp.class);
-        manager.register("AutoDriveByTime",AutoDriveByTime.class);
-        //Coding makes me contemplate my existence
         manager.register("ColorCheck",ColorCheck.class);
-        manager.register("MRI_Color_Sensors", MRI_Color_Sensors.class);
-        manager.register("DriveByEncoder",DriveByEncoder.class);
         manager.register("AutoBlue1", AutoBlue1.class);
         manager.register("AutoColorTest", AutoColorTest.class);
         manager.register("DriveByEncoderSimple", DriveByEncoderSimple.class);

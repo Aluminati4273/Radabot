@@ -86,7 +86,7 @@ public class RadabotTeleOp extends LinearOpMode {
 
             // lift up using gamepad2 left stick
             robot.lift.setPower(gamepad2.left_stick_y);
-            //Will I ever be found?
+
             // control plate drive using gamepad2 right stick
             robot.plateDrive.setPower(-gamepad2.right_stick_x / 4.0);
 
@@ -118,30 +118,9 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
 
-            //This is to allow the driver to adjust precisely for
-            /*
-            if (gamepad2.dpad_down && gamepad2.right_trigger < robot.threshold1)
-            {
-                robot.glyphServo1.setPosition(robot.glyphServo1.getPosition() + 0.05);
-                robot.glyphServo2.setPosition(robot.glyphServo2.getPosition() - 0.05);
-                robot.glyphServo3.setPosition(robot.glyphServo3.getPosition() + 0.05);
-                robot.glyphServo4.setPosition(robot.glyphServo4.getPosition() - 0.05);
 
-            }
-
-            if (gamepad2.dpad_up && gamepad2.left_trigger < robot.threshold1)
-            {
-                robot.glyphServo1.setPosition(robot.glyphServo1.getPosition() - 0.05);
-                robot.glyphServo2.setPosition(robot.glyphServo2.getPosition() + 0.05);
-                robot.glyphServo3.setPosition(robot.glyphServo3.getPosition() - 0.05);
-                robot.glyphServo4.setPosition(robot.glyphServo4.getPosition() + 0.05);
-
-            }
-                */
 
 
         }
     }
 }
-//the programmer needs to die
-//and wants to

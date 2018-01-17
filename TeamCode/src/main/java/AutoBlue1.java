@@ -16,7 +16,7 @@ public class AutoBlue1 extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareRadabot         robot   = new HardwareRadabot();   // Use a Radabot's hardware
-    DriveByEncoder  encoder = new DriveByEncoder(); // Use DriveByEncoder class
+
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
@@ -24,35 +24,33 @@ public class AutoBlue1 extends LinearOpMode {
 
         robot.init(hardwareMap);
 
-       // robot.redColor.setI2cAddress(I2cAddr.create7bit(0x10));
         robot.blueColor.setI2cAddress(I2cAddr.create7bit(0x20));
 
         waitForStart();
 
-        //The suffering never ends. You just become numb to the pain.
-
-        robot.blueColor.enableLed(true);
-
-
 
         robot.jewelServoBlue.setPosition(0.95);
 
-        robot.bluePlateDistance(0.5, 550);
+        robot.bluePlateDistance(0.5, 500);
 
-
-
-        if (robot.blueColorNumber < 4 && robot.blueColorNumber > 2)
+        while(opModeIsActive())
         {
-            robot.driveBackDistance(1.0, 700);
+            if (robot.blueColorNumber < 4 && robot.blueColorNumber > 2)
+            {
+                robot.driveBackDistance(1.0, 700);
+            }
+
+            //if color sensor is blue, drive backward
+            if(robot.blueColorNumber < 11 && robot.blueColorNumber > 8)
+            {
+
+
+                robot.driveForwardDistance(1.0, 1500);
+            }
         }
 
-        //if color sensor is blue, drive backward
-        if(robot.blueColorNumber < 11 && robot.blueColorNumber > 8)
-        {
 
 
-            robot.driveForwardDistance(1.0, 1500);
-        }
 
 
     }

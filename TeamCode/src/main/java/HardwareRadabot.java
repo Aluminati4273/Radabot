@@ -53,10 +53,6 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
  */
 public class HardwareRadabot
 {
-
-
-
-
     /* Public OpMode members. */
     // set up the drive train, set = null that way it doesnt run
     // set up every motor/servo
@@ -66,16 +62,16 @@ public class HardwareRadabot
     public DcMotor  rightBackDrive = null;
     public DcMotor  plateDrive = null;
     public Servo  jewelServoBlue = null;
-    public Servo jewelServoRed = null;
+
     public Servo glyphServo1 = null;
     public Servo glyphServo2 = null;
     public Servo glyphServo3 = null;
     public Servo glyphServo4 = null;
-   // public Servo relicClaw = null;
- //   public Servo relicLift = null;
+    public Servo relicClaw = null;
+    public Servo relicLift = null;
     public DcMotor  lift = null;
     public DcMotor relic = null;
-    public ModernRoboticsI2cColorSensor redColor = null;
+
     public ModernRoboticsI2cColorSensor blueColor = null;
 
 
@@ -83,15 +79,15 @@ public class HardwareRadabot
     //servo start position/end position
     //this is to initialize the end and start position of the jewel servo fairly self explanatory
     // set all locations and positions for jewel servos
-    public final static double JEWEL_SERVO_BLUE_START = 0.0;
-    public final static double JEWEL_SERVO_RED_START = 0.95;
-    public final static double JEWEL_SERVO_BLUE_DETECT = 0.5;
-    public final static double JEWEL_SERVO_RED_DETECT = 0.05;
+    public final static double JEWEL_SERVO_BLUE_START = 0.1;
+
+
+
     //setting the stop positions to 0.50 because a continuous servo always thinks it is centered
     //might need to adjust this later
-    // someone kill 4273 programmer
+
    // public final static double RELIC_CLAW_STOP = 0.50;
-   // public final static double RELIC_LIFT_STOP = 0.50;
+   public final static double RELIC_LIFT_STOP = 0.50;
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.8;
     public final static double GLYPH2_START = 0.0;
@@ -106,9 +102,9 @@ public class HardwareRadabot
     public final static double GLYPH3_CLOSED = 0.7;
     public final static double GLYPH4_CLOSED = 0.3;
 
-    public final static double platePower = 0.5;
 
-    public static int redColorNumber;
+
+
     public static int blueColorNumber;
 
 
@@ -134,10 +130,10 @@ public class HardwareRadabot
 
         //Initialize two color sensors for jewel sensing
         blueColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "blueColor");
-        redColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "redColor");
+
 
         // Set a variable for the current Color Number
-        redColorNumber = redColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER);
+
         blueColorNumber = blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER);
 
         blueColor.enableLed(true);
@@ -172,8 +168,7 @@ public class HardwareRadabot
         rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Define and initialize ALL installed servos.
-        jewelServoRed = hwMap.get(Servo.class, "jewel_red");
-        jewelServoRed.setPosition(JEWEL_SERVO_RED_START);
+
         jewelServoBlue = hwMap.get(Servo.class, "jewel_blue");
         jewelServoBlue.setPosition(JEWEL_SERVO_BLUE_START);
         glyphServo1 = hwMap.get(Servo.class, "glyph1");
@@ -197,7 +192,7 @@ public class HardwareRadabot
             glyphServo4.setPosition(GLYPH4_OPEN);
             glyphState = true;
         }
-            //Why does God put us on Earth? Is it just to suffer?
+
         //method for closing claw
         public void closeClaw()
         {
