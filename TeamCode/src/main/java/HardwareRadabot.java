@@ -27,12 +27,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.sun.tools.javac.tree.DCTree;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 /**
  * This is NOT an opmode.
@@ -72,7 +75,13 @@ public class HardwareRadabot
     public DcMotor  lift = null;
     public DcMotor relic = null;
 
+    //color sensor setup
     public ModernRoboticsI2cColorSensor blueColor = null;
+
+    //touch sensor set up
+    DigitalChannel liftTouch;
+
+    DeviceInterfaceModule cdi;
 
 
 
@@ -86,8 +95,9 @@ public class HardwareRadabot
     //setting the stop positions to 0.50 because a continuous servo always thinks it is centered
     //might need to adjust this later
 
-   // public final static double RELIC_CLAW_STOP = 0.50;
-   public final static double RELIC_LIFT_STOP = 0.50;
+
+    public final static double down = 0.5;
+    public final static double up = 1.0;
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.8;
     public final static double GLYPH2_START = 0.0;
@@ -95,13 +105,14 @@ public class HardwareRadabot
     public final static double GLYPH4_START = 0.85;
     public final static double GLYPH1_OPEN = 0.24;
     public final static double GLYPH2_OPEN = 0.44;
-    public final static double GLYPH3_OPEN = 0.32;
-    public final static double GLYPH4_OPEN = 0.7;
+    public final static double GLYPH3_OPEN = 0.7;
+    public final static double GLYPH4_OPEN = 0.3;
     public final static double GLYPH1_CLOSED = 0.6;
     public final static double GLYPH2_CLOSED = 0.2;
-    public final static double GLYPH3_CLOSED = 0.7;
-    public final static double GLYPH4_CLOSED = 0.3;
-
+    public final static double GLYPH3_CLOSED = 0.32;
+    public final static double GLYPH4_CLOSED = 0.7;
+    public final static double RELIC_CLAW_OPEN = 0.0;
+    public final static double RELIC_CLAW_CLOSED = 0.80;
 
 
 
@@ -128,8 +139,10 @@ public class HardwareRadabot
         // save reference to HW Map
         hwMap = ahwMap;
 
-        //Initialize two color sensors for jewel sensing
+        //Initialize color sensor for jewel sensing
         blueColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "blueColor");
+        liftTouch = hwMap.digitalChannel.get("lift_touch");
+
 
 
         // Set a variable for the current Color Number
@@ -169,6 +182,10 @@ public class HardwareRadabot
 
         // Define and initialize ALL installed servos.
 
+        relicLift = hwMap.get(Servo.class,"relic_lift");
+        relicLift.setPosition(down);
+        relicClaw = hwMap.get(Servo.class, "relic_claw");
+        relicClaw.setPosition(RELIC_CLAW_CLOSED);
         jewelServoBlue = hwMap.get(Servo.class, "jewel_blue");
         jewelServoBlue.setPosition(JEWEL_SERVO_BLUE_START);
         glyphServo1 = hwMap.get(Servo.class, "glyph1");

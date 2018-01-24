@@ -72,8 +72,8 @@ public class RadabotTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-            left = -gamepad1.left_stick_y / 1.5;
-            right = -gamepad1.right_stick_y / 1.5;
+            left = -gamepad1.left_stick_y ;
+            right = -gamepad1.right_stick_y ;
 
 
             // left drive for robot using gamepad1 sticks (tank drive)
@@ -108,17 +108,44 @@ public class RadabotTeleOp extends LinearOpMode {
 
             //control for the relic extension arm
             while (gamepad2.a) {
-                robot.relic.setPower(0.9);
+                robot.relic.setPower(1.0);
             }
             while (gamepad2.b) {
-                robot.relic.setPower(-0.9);
+                robot.relic.setPower(-1.0);
             }
             if (!gamepad2.a || !gamepad2.b) {
                 robot.relic.setPower(0.0);
             }
 
+            if (gamepad2.x)
+            {
+                if(robot.relicClaw.getPosition()< 1.0)
+                {
+                    robot.relicClaw.setPosition(robot.relicClaw.getPosition() + 0.05);
+                }
+            }
+            if (gamepad2.y)
+            {
+                if(robot.relicClaw.getPosition() > 0.0)
+                {
+                    robot.relicClaw.setPosition(robot.relicClaw.getPosition() - 0.05);
+                }
+            }
 
-
+            if (gamepad2.left_bumper)
+            {
+                if(robot.relicLift.getPosition()< 1.0)
+                {
+                    robot.relicLift.setPosition(robot.relicLift.getPosition() + 0.025);
+                }
+            }
+            if(gamepad2.right_bumper)
+            {
+                if(robot.relicLift.getPosition()> 0.0)
+                {
+                    robot.relicLift.setPosition(robot.relicLift.getPosition() - 0.025);
+                }
+            }
 
 
         }
