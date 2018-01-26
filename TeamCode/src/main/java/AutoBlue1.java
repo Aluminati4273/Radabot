@@ -67,14 +67,13 @@ public class AutoBlue1 extends LinearOpMode {
         // slide the plate drive into position (toward the blue color sensor side)
         robot.bluePlateDistance(0.5, 500);
 
-        while(opModeIsActive())
-        {
+
             // check to see if the color sensed is red, drive forward (know off the red jewel in front of the sensor)
             if (robot.blueColor.red() > robot.blueColor.green() && robot.blueColor.red() > robot.blueColor.blue())
             {
                 telemetry.addData("Hey", robot.blueColor.red());
                 telemetry.update();
-                robot.driveForwardDistance(.50, 1000);
+                robot.driveForwardDistance(.50, 200);
                 direction = true;
             }
 
@@ -84,6 +83,7 @@ public class AutoBlue1 extends LinearOpMode {
                 robot.driveBackDistance(.50, 200);
                 telemetry.addData("color", robot.blueColor.red());
                 telemetry.update();
+
             }
 
             telemetry.addData("Clear", robot.blueColor.alpha());
@@ -103,14 +103,14 @@ public class AutoBlue1 extends LinearOpMode {
 
             if(direction = true)
             {
-                robot.driveForwardDistance(1.0, 800);
+                robot.driveForwardDistance(1.0, 1000);
             }
 
             if(direction = false)
             {
-                robot.driveForwardDistance(1.0, 1200);
+                robot.driveForwardDistance(1.0, 5000);
             }
-        }
+
 
 
 
