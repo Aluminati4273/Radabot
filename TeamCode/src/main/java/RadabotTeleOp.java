@@ -147,6 +147,10 @@ public class RadabotTeleOp extends LinearOpMode {
                 }
             }
 
+            if(gamepad1.a)
+            {
+                robot.relicLift.setPosition(robot.up);
+            }
 
         }
     }

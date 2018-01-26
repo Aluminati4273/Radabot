@@ -96,7 +96,7 @@ public class HardwareRadabot
     //might need to adjust this later
 
 
-    public final static double down = 0.5;
+    public final static double down = 0.0;
     public final static double up = 1.0;
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.8;
@@ -147,9 +147,10 @@ public class HardwareRadabot
 
         // Set a variable for the current Color Number
 
+        blueColor.enableLed(true);
+
         blueColorNumber = blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER);
 
-        blueColor.enableLed(true);
         // Define and Initialize Motors
         leftFrontDrive = hwMap.get(DcMotor.class, "left_Front_Drive");
         leftBackDrive = hwMap.get(DcMotor.class, "left_Back_Drive");

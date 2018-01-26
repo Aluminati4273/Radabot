@@ -19,8 +19,6 @@ public class ColorCheck extends LinearOpMode {
 
     public void runOpMode()
     {
-
-
         robot.init(hardwareMap);
 
         //Set color sensor I2C addresses
