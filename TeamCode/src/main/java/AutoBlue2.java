@@ -1,7 +1,5 @@
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -12,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="AutoBlue1", group="Auto")
 
-public class AutoBlue1 extends LinearOpMode {
+public class AutoBlue2 extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareRadabot         robot   = new HardwareRadabot();   // Use a Radabot's hardware
@@ -21,7 +19,7 @@ public class AutoBlue1 extends LinearOpMode {
 
     //
     private int autoTrip = 0;
-    private boolean direction = false;
+
     @Override
     public void runOpMode() {
 
@@ -42,7 +40,6 @@ public class AutoBlue1 extends LinearOpMode {
             {
                 robot.driveBackDistance(1.0, 700);
                 autoTrip ++;
-                direction = true;
             }
 
             //if color sensor is blue, drive backward
@@ -50,7 +47,7 @@ public class AutoBlue1 extends LinearOpMode {
             {
 
 
-                robot.driveForwardDistance(1.0, 200);
+                robot.driveForwardDistance(1.0, 1500);
                 autoTrip++;
             }
         }
@@ -62,16 +59,6 @@ public class AutoBlue1 extends LinearOpMode {
         robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_START);
 
         sleep (250);
-
-
-        if(direction = true) {
-            robot.driveForwardDistance(1.0, 1200);
-        }
-        else{
-            robot.driveForwardDistance(1.0, 2200);
-        }
-
-
 
 
 
