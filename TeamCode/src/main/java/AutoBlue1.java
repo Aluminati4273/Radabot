@@ -19,6 +19,9 @@ public class AutoBlue1 extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
+    //
+    private int autoTrip = 0;
+
     @Override
     public void runOpMode() {
 
@@ -33,11 +36,12 @@ public class AutoBlue1 extends LinearOpMode {
 
         robot.bluePlateDistance(0.5, 500);
 
-        while(opModeIsActive())
+        while(opModeIsActive() && autoTrip <1)
         {
             if (robot.blueColorNumber < 4 && robot.blueColorNumber > 2)
             {
                 robot.driveBackDistance(1.0, 700);
+                autoTrip ++;
             }
 
             //if color sensor is blue, drive backward
@@ -46,8 +50,19 @@ public class AutoBlue1 extends LinearOpMode {
 
 
                 robot.driveForwardDistance(1.0, 1500);
+                autoTrip++;
             }
         }
+
+        robot.bluePlateDistance(0.5,-500);
+
+        sleep(250);
+
+        robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_START);
+
+        sleep (250);
+
+
 
 
 
