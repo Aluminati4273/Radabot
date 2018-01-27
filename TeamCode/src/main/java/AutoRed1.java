@@ -1,18 +1,18 @@
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import android.graphics.Color;
 
 /**
  * Created by londonjenks on 12/5/17.
  */
 
 
-@Autonomous(name="AutoBlue1", group="Auto")
+@Autonomous(name="AutoRed1", group="Auto")
 
-public class AutoBlue1 extends LinearOpMode {
+public class AutoRed1 extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareRadabot         robot   = new HardwareRadabot();   // Use a Radabot's hardware
@@ -63,10 +63,12 @@ public class AutoBlue1 extends LinearOpMode {
             telemetry.update();
 
 
+
+            //if color sensor sees red, drive backward
             if (robot.blueColor.red() > robot.blueColor.blue() && robot.blueColor.red() > robot.blueColor.green())
             {
-                //drive forward power and distance
-                robot.driveForwardDistance(1.0, 700);
+                //drive backward power and distance
+                robot.driveBackDistance(1.0, 700);
 
                 //increment so robot only passes through sequence once
                 autoTrip ++;
@@ -75,12 +77,12 @@ public class AutoBlue1 extends LinearOpMode {
                 direction = true;
             }
 
-            //if color sensor is blue, drive backward
+            //if color sensor is blue, drive forward
             if (robot.blueColor.blue() > robot.blueColor.red() && robot.blueColor.blue() > robot.blueColor.green())
             {
 
-                //drive backward power and distance
-                robot.driveBackDistance(1.0, 200);
+                //drive forward power and distance
+                robot.driveForwardDistance(1.0, 200);
 
                 // increment so robot only passes through sequence once
                 autoTrip++;
@@ -101,14 +103,12 @@ public class AutoBlue1 extends LinearOpMode {
 
 
         //if the robot drove forward to hit the red jewel then drive forward less to park
-        if(direction = true)
-        {
+        if(direction = true) {
             robot.driveForwardDistance(1.0, 1200);
         }
 
         // if the robot drove backward to hit the red jewel then drive forward more to park
-        else
-        {
+        else{
             robot.driveForwardDistance(1.0, 1600);
         }
 

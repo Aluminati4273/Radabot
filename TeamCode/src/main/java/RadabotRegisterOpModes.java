@@ -65,6 +65,7 @@ public class RadabotRegisterOpModes
         manager.register("ColorCheck",ColorCheck.class);
         manager.register("AutoBlue1", AutoBlue1.class);
         manager.register("AutoBlue2", AutoBlue2.class);
+        manager.register("AutoRed1", AutoRed1.class);
         manager.register("AutoColorTest", AutoColorTest.class);
         manager.register("DriveByEncoderSimple", DriveByEncoderSimple.class);
         manager.register("DriveByEncoderSimple2", DriveByEncoderSimple2.class);

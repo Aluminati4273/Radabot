@@ -62,11 +62,11 @@ public class AutoBlue2 extends LinearOpMode {
             telemetry.addData("Hue", hsvValues[0]);
             telemetry.update();
 
-
+            //if color sensor is red, drive forward
             if (robot.blueColor.red() > robot.blueColor.blue() && robot.blueColor.red() > robot.blueColor.green())
             {
-                //drive backward power and distance
-                robot.driveBackDistance(1.0, 700);
+                //drive forward power and distance
+                robot.driveForwardDistance(1.0, 700);
 
                 //increment so robot only passes through sequence once
                 autoTrip ++;
@@ -80,7 +80,7 @@ public class AutoBlue2 extends LinearOpMode {
             {
 
                 //drive forward power and distance
-                robot.driveForwardDistance(1.0, 200);
+                robot.driveBackDistance(1.0, 200);
 
                 // increment so robot only passes through sequence once
                 autoTrip++;
