@@ -35,7 +35,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.sun.tools.javac.tree.DCTree;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 /**
  * This is NOT an opmode.
@@ -64,40 +64,48 @@ public class HardwareRadabot
     public DcMotor  rightFrontDrive = null;
     public DcMotor  rightBackDrive = null;
     public DcMotor  plateDrive = null;
+
+    //color sensor arm servo
     public Servo  jewelServoBlue = null;
 
+    //four glyph grabing servos
     public Servo glyphServo1 = null;
     public Servo glyphServo2 = null;
     public Servo glyphServo3 = null;
     public Servo glyphServo4 = null;
+
+    //relic servos and motors
     public Servo relicClaw = null;
     public Servo relicLift = null;
     public DcMotor  lift = null;
     public DcMotor relic = null;
 
+    //lift "bottom out" notification servo flag
+    public Servo liftFlag = null;
+
     //color sensor setup
     public ModernRoboticsI2cColorSensor blueColor = null;
 
     //touch sensor set up
-    DigitalChannel liftTouch;
+    public TouchSensor liftTouch = null;
 
+    //part of set up for Core Device Interface
     DeviceInterfaceModule cdi;
 
 
-
-    //servo start position/end position
     //this is to initialize the end and start position of the jewel servo fairly self explanatory
     // set all locations and positions for jewel servos
     public final static double JEWEL_SERVO_BLUE_START = 0.1;
 
+    //set up and down positions for the lift "bottom out" notification servo flag
+    public final static double FLAG_UP = 1.0;
+    public final static double FLAG_DOWN = 0.5;
 
-
-    //setting the stop positions to 0.50 because a continuous servo always thinks it is centered
-    //might need to adjust this later
-
-
+    //set power for the lift motor
     public final static double down = 0.0;
     public final static double up = 1.0;
+
+
     // set all locations and positions for the glyph servos
     public final static double GLYPH1_START = 0.8;
     public final static double GLYPH2_START = 0.0;
@@ -111,6 +119,8 @@ public class HardwareRadabot
     public final static double GLYPH2_CLOSED = 0.2;
     public final static double GLYPH3_CLOSED = 0.32;
     public final static double GLYPH4_CLOSED = 0.7;
+
+    // set positions for relic claw
     public final static double RELIC_CLAW_OPEN = 0.0;
     public final static double RELIC_CLAW_CLOSED = 0.80;
 
@@ -141,12 +151,11 @@ public class HardwareRadabot
 
         //Initialize color sensor for jewel sensing
         blueColor = hwMap.get(ModernRoboticsI2cColorSensor.class, "blueColor");
-        liftTouch = hwMap.digitalChannel.get("lift_touch");
 
+        //touch sensor set up for driver lift notification (when it hits the bottom)
+        liftTouch = hwMap.touchSensor.get("lift_touch");
 
-
-        // Set a variable for the current Color Number
-
+        // turn on the LED for the color sensor (Active mode)
         blueColor.enableLed(true);
 
         blueColorNumber = blueColor.readUnsignedByte(ModernRoboticsI2cColorSensor.Register.COLOR_NUMBER);
@@ -182,7 +191,6 @@ public class HardwareRadabot
         rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Define and initialize ALL installed servos.
-
         relicLift = hwMap.get(Servo.class,"relic_lift");
         relicLift.setPosition(down);
         relicClaw = hwMap.get(Servo.class, "relic_claw");
@@ -198,6 +206,10 @@ public class HardwareRadabot
         glyphServo4 = hwMap.get(Servo.class, "glyph4");
         glyphServo4.setPosition(GLYPH4_START);
        // relicClaw.setPosition(RELIC_CLAW_STOP);
+
+        //initialize and set initialize position for liftFlag
+        liftFlag = hwMap.get(Servo.class, "lift_Flag");
+        liftFlag.setPosition(FLAG_DOWN);
 
 
     }

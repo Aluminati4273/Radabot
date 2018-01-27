@@ -152,6 +152,16 @@ public class RadabotTeleOp extends LinearOpMode {
                 robot.relicLift.setPosition(robot.up);
             }
 
+            //set "bottom out" flag notification position based on touch sensor value, otherwise it is down
+            if(robot.liftTouch.isPressed())
+            {
+                robot.liftFlag.setPosition(robot.FLAG_UP);
+            }
+            else
+            {
+                robot.liftFlag.setPosition(robot.FLAG_DOWN);
+            }
+
         }
     }
 }
