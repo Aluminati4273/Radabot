@@ -68,7 +68,7 @@ public class AutoBlue1 extends LinearOpMode {
             robot.driveForwardDistance(1.0, 1200);
         }
         else{
-            robot.driveForwardDistance(1.0, 2200);
+            robot.driveForwardDistance(1.0, 1600);
         }
 
 
