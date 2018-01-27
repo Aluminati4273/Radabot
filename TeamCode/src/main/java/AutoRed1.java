@@ -68,7 +68,7 @@ public class AutoRed1 extends LinearOpMode {
             if (robot.blueColor.red() > robot.blueColor.blue() && robot.blueColor.red() > robot.blueColor.green())
             {
                 //drive backward power and distance
-                robot.driveBackDistance(1.0, 700);
+                robot.driveBackDistance(1.0, 200);
 
                 //increment so robot only passes through sequence once
                 autoTrip ++;

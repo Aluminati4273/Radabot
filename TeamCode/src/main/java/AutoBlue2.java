@@ -66,7 +66,7 @@ public class AutoBlue2 extends LinearOpMode {
             if (robot.blueColor.red() > robot.blueColor.blue() && robot.blueColor.red() > robot.blueColor.green())
             {
                 //drive forward power and distance
-                robot.driveForwardDistance(1.0, 700);
+                robot.driveForwardDistance(1.0, 200);
 
                 //increment so robot only passes through sequence once
                 autoTrip ++;
