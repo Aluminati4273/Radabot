@@ -1,12 +1,12 @@
 import android.graphics.Color;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * Created by londonjenks on 12/5/17.
+/*
+ * Autonomous code for identify the blue jewel and knocking it off and then parking in the nearest
+ * parking zone.
  */
 
 
@@ -22,16 +22,17 @@ public class AutoRed1 extends LinearOpMode {
     //===================== Color Sensor Setup ===========================
 
     // hsvValues is an array that will hold the hue, saturation, and value information.
-    float hsvValues[] = {0F,0F,0F};
+    private float hsvValues[] = {0F,0F,0F};
 
     // values is a reference to the hsvValues array.
     final float values[] = hsvValues;
     //====================================================================
 
 
-    //
+    //private instance variables
     private int autoTrip = 0;
     private boolean direction = false;
+
     @Override
     public void runOpMode() {
 
@@ -96,20 +97,20 @@ public class AutoRed1 extends LinearOpMode {
         sleep(250);
 
         //return color sensor arm to start position
-        robot.jewelServoBlue.setPosition(robot.JEWEL_SERVO_BLUE_START);
+        robot.jewelServoBlue.setPosition(HardwareRadabot.JEWEL_SERVO_BLUE_START);
 
         //wait a quarter of a second
         sleep (250);
 
 
-        //if the robot drove forward to hit the red jewel then drive forward less to park
+        //if the robot drove back to hit the blue jewel then drive backward less to park
         if(direction = true) {
-            robot.driveForwardDistance(1.0, 1200);
+            robot.driveBackDistance(1.0, 1200);
         }
 
-        // if the robot drove backward to hit the red jewel then drive forward more to park
+        // if the robot drove forward to hit the blue jewel then drive backward more to park
         else{
-            robot.driveForwardDistance(1.0, 1600);
+            robot.driveBackDistance(1.0, 1600);
         }
 
 

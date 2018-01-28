@@ -1,18 +1,18 @@
+import android.graphics.Color;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import android.graphics.Color;
 
 /*
- * Autonomous code for identify the red jewel and knocking it off and then parking in the nearest
+ * Autonomous code for identify the blue jewel and knocking it off and then parking in the nearest
  * parking zone.
  */
 
 
-@Autonomous(name="AutoBlue2", group="Auto")
+@Autonomous(name="AutoRed2", group="Auto")
 
-public class AutoBlue2 extends LinearOpMode {
+public class AutoRed2 extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareRadabot         robot   = new HardwareRadabot();   // Use a Radabot's hardware
@@ -62,11 +62,13 @@ public class AutoBlue2 extends LinearOpMode {
             telemetry.addData("Hue", hsvValues[0]);
             telemetry.update();
 
-            //if color sensor is red, drive forward
+
+
+            //if color sensor sees red, drive backward
             if (robot.blueColor.red() > robot.blueColor.blue() && robot.blueColor.red() > robot.blueColor.green())
             {
-                //drive forward power and distance
-                robot.driveForwardDistance(1.0, 200);
+                //drive backward power and distance
+                robot.driveBackDistance(1.0, 200);
 
                 //increment so robot only passes through sequence once
                 autoTrip ++;
@@ -75,19 +77,19 @@ public class AutoBlue2 extends LinearOpMode {
                 direction = true;
             }
 
-            //if color sensor is blue, drive backward
+            //if color sensor is blue, drive forward
             if (robot.blueColor.blue() > robot.blueColor.red() && robot.blueColor.blue() > robot.blueColor.green())
             {
 
                 //drive forward power and distance
-                robot.driveBackDistance(1.0, 200);
+                robot.driveForwardDistance(1.0, 200);
 
                 // increment so robot only passes through sequence once
                 autoTrip++;
             }
         }
 
-        //retract slide plate to center
+        //retract slide plate to cener
         robot.bluePlateDistance(0.5,-500);
 
         //wait a quarter of a second
@@ -100,25 +102,30 @@ public class AutoBlue2 extends LinearOpMode {
         sleep (250);
 
 
-        //if the robot drove forward to hit the red jewel then drive forward less to park
+        //if the robot drove back to hit the blue jewel then drive backward less to park
         if(direction = true) {
-            robot.driveForwardDistance(1.0, 600);
+            robot.driveBackDistance(1.0, 1000);
         }
 
-        // if the robot drove backward to hit the red jewel then drive forward more to park
+        // if the robot drove forward to hit the blue jewel then drive backward more to park
         else{
-            robot.driveForwardDistance(1.0, 900);
+            robot.driveBackDistance(1.0, 1200);
         }
 
         //wait a quarter of a second
-        sleep (250);
+        sleep(250);
 
-        //turn to the right to face the park area
-        robot.turnRightDistance(0.7, 400);
+        //turn left to align with the park zone
+        robot.turnLeftDistance(0.7,400);
 
 
-        //drive forward to the park area
-        robot.driveForwardDistance(0.7, 700);
+        //wait a quarter of a second
+        sleep(250);
+
+        //drive backward into park zone
+        robot.driveBackDistance(1.0, 700);
+
+
     }
 
 
