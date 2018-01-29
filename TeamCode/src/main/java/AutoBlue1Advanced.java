@@ -75,7 +75,7 @@ public class AutoBlue1Advanced extends LinearOpMode {
             telemetry.addData("Hue", hsvValues[0]);
             telemetry.update();
 
-
+            // if blue is greater than red and green
             if (robot.blueColor.red() > robot.blueColor.blue() && robot.blueColor.red() > robot.blueColor.green())
             {
                 //drive forward power and distance
