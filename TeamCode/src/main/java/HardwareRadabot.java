@@ -113,12 +113,12 @@ public class HardwareRadabot
     public final static double GLYPH4_START = 0.85;
     public final static double GLYPH1_OPEN = 0.24;
     public final static double GLYPH2_OPEN = 0.44;
-    public final static double GLYPH3_OPEN = 0.7;
-    public final static double GLYPH4_OPEN = 0.3;
-    public final static double GLYPH1_CLOSED = 0.30;
-    public final static double GLYPH2_CLOSED = 0.35;
-    public final static double GLYPH3_CLOSED = 0.5;
-    public final static double GLYPH4_CLOSED = 0.5;
+    public final static double GLYPH3_OPEN = 0.6;
+    public final static double GLYPH4_OPEN = 0.5;
+    public final static double GLYPH1_CLOSED = 0.40;
+    public final static double GLYPH2_CLOSED = 0.25;
+    public final static double GLYPH3_CLOSED = 0.3;
+    public final static double GLYPH4_CLOSED = 0.7;
 
     // set positions for relic claw
     public final static double RELIC_CLAW_OPEN = 0.0;

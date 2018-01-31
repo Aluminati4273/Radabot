@@ -49,6 +49,8 @@ public class AutoRed2 extends LinearOpMode {
         //move the servo into detect position
         robot.jewelServoBlue.setPosition(1.0);
 
+        sleep(250);
+
         robot.bluePlateDistance(0.5, 500);
 
         while(opModeIsActive() && autoTrip <1)
@@ -82,7 +84,7 @@ public class AutoRed2 extends LinearOpMode {
             {
 
                 //drive forward power and distance
-                robot.driveForwardDistance(1.0, 200);
+                robot.driveForwardDistance(0.5, 200);
 
                 // increment so robot only passes through sequence once
                 autoTrip++;
@@ -109,21 +111,19 @@ public class AutoRed2 extends LinearOpMode {
 
         // if the robot drove forward to hit the blue jewel then drive backward more to park
         else{
-            robot.driveBackDistance(1.0, 1200);
+            robot.driveBackDistance(1.0, 2500);
         }
 
         //wait a quarter of a second
         sleep(250);
 
         //turn left to align with the park zone
-        robot.turnLeftDistance(0.7,400);
 
 
         //wait a quarter of a second
         sleep(250);
 
         //drive backward into park zone
-        robot.driveBackDistance(1.0, 700);
 
 
     }

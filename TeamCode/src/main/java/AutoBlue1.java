@@ -82,7 +82,7 @@ import android.graphics.Color;
                     {
 
                         //drive backward power and distance
-                        robot.driveBackDistance(0.5, 150);
+                        robot.driveBackDistance(0.4, 150);
 
                         // increment so robot only passes through sequence once
                         autoTrip++;

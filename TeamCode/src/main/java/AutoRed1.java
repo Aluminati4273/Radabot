@@ -50,7 +50,9 @@ public class AutoRed1 extends LinearOpMode {
         //move the servo into detect position
         robot.jewelServoBlue.setPosition(1.0);
 
-        robot.bluePlateDistance(0.5, 500);
+        sleep(250);
+
+        robot.bluePlateDistance(0.5, 450);
 
         while(opModeIsActive() && autoTrip <1)
         {
@@ -91,7 +93,7 @@ public class AutoRed1 extends LinearOpMode {
         }
 
         //retract slide plate to cener
-        robot.bluePlateDistance(0.5,-500);
+        robot.bluePlateDistance(0.5,-450);
 
         //wait a quarter of a second
         sleep(250);
@@ -105,12 +107,13 @@ public class AutoRed1 extends LinearOpMode {
 
         //if the robot drove back to hit the blue jewel then drive backward less to park
         if(direction = true) {
-            robot.driveBackDistance(0.5, 1200);
+            robot.driveBackDistance(0.5, 1600);
         }
 
         // if the robot drove forward to hit the blue jewel then drive backward more to park
         else{
-            robot.driveBackDistance(0.5, 1600);
+            robot.driveForwardDistance(0.5, -3500);
+
         }
 
 
