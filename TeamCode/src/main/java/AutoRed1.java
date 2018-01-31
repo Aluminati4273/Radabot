@@ -105,12 +105,12 @@ public class AutoRed1 extends LinearOpMode {
 
         //if the robot drove back to hit the blue jewel then drive backward less to park
         if(direction = true) {
-            robot.driveBackDistance(1.0, 1200);
+            robot.driveBackDistance(0.5, 1200);
         }
 
         // if the robot drove forward to hit the blue jewel then drive backward more to park
         else{
-            robot.driveBackDistance(1.0, 1600);
+            robot.driveBackDistance(0.5, 1600);
         }
 
 

@@ -94,7 +94,7 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
             // move the relic claw incrementally if less than 1.0 position
-            if (gamepad2.x)
+            if (gamepad1.x)
             {
                 if(robot.relicClaw.getPosition()< 1.0)
                 {
@@ -103,7 +103,7 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
             // move the reclic claw incrementally if more than 0.0 position
-            if (gamepad2.y)
+            if (gamepad1.y)
             {
                 if(robot.relicClaw.getPosition() > 0.0)
                 {
@@ -112,7 +112,7 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
             // move the relic up (horizontal) if less than 1.0 position
-            if (gamepad2.left_bumper)
+            if (gamepad1.left_bumper)
             {
                 if(robot.relicLift.getPosition()< 1.0)
                 {
@@ -121,7 +121,7 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
             //move the relic down (vertical) if more than 0.0 position
-            if(gamepad2.right_bumper)
+            if(gamepad1.right_bumper)
             {
                 if(robot.relicLift.getPosition()> 0.0)
                 {
@@ -130,10 +130,8 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
 
-            if(gamepad1.a)
-            {
-                robot.relicLift.setPosition(robot.up);
-            }
+
+
 
             //set "bottom out" flag notification position based on touch sensor value, otherwise it is down
             if(robot.liftTouch.isPressed())

@@ -49,6 +49,8 @@ import android.graphics.Color;
                 //move the servo into detect position
                 robot.jewelServoBlue.setPosition(1.0);
 
+                sleep(250);
+
                 robot.bluePlateDistance(0.5, 500);
 
                 while(opModeIsActive() && autoTrip <1)
@@ -66,7 +68,7 @@ import android.graphics.Color;
                     if (robot.blueColor.red() > robot.blueColor.blue() && robot.blueColor.red() > robot.blueColor.green())
                     {
                         //drive forward power and distance
-                        robot.driveForwardDistance(1.0, 200);
+                        robot.driveForwardDistance(1.0, 150);
 
                         //increment so robot only passes through sequence once
                         autoTrip ++;
@@ -80,7 +82,7 @@ import android.graphics.Color;
                     {
 
                         //drive backward power and distance
-                        robot.driveBackDistance(1.0, 200);
+                        robot.driveBackDistance(0.5, 150);
 
                         // increment so robot only passes through sequence once
                         autoTrip++;
@@ -100,16 +102,16 @@ import android.graphics.Color;
                 sleep (250);
 
 
-                //if the robot drove forward to hit the red jewel then drive forward less to park
+                //if the robot drove backward to hit the red jewel then drive forward more to park
                 if(direction = true)
                 {
-                    robot.driveForwardDistance(1.0, 1200);
+                    robot.driveForwardDistance(1.0, 2000);
                 }
 
-                // if the robot drove backward to hit the red jewel then drive forward more to park
+                // if the robot drove forward to hit the red jewel then drive forward more to park
                 else
                 {
-                    robot.driveForwardDistance(1.0, 1600);
+                    robot.driveForwardDistance(1.0, 1800);
                 }
 
 

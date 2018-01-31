@@ -98,11 +98,11 @@ public class HardwareRadabot
     public final static double JEWEL_SERVO_BLUE_START = 0.1;
 
     //set up and down positions for the lift "bottom out" notification servo flag
-    public final static double FLAG_UP = 1.0;
+    public final static double FLAG_UP = 0.0;
     public final static double FLAG_DOWN = 0.5;
 
     //set power for the lift motor
-    public final static double down = 0.0;
+    public final static double down = 0.5;
     public final static double up = 1.0;
 
 
@@ -115,10 +115,10 @@ public class HardwareRadabot
     public final static double GLYPH2_OPEN = 0.44;
     public final static double GLYPH3_OPEN = 0.7;
     public final static double GLYPH4_OPEN = 0.3;
-    public final static double GLYPH1_CLOSED = 0.6;
-    public final static double GLYPH2_CLOSED = 0.2;
-    public final static double GLYPH3_CLOSED = 0.32;
-    public final static double GLYPH4_CLOSED = 0.7;
+    public final static double GLYPH1_CLOSED = 0.30;
+    public final static double GLYPH2_CLOSED = 0.35;
+    public final static double GLYPH3_CLOSED = 0.5;
+    public final static double GLYPH4_CLOSED = 0.5;
 
     // set positions for relic claw
     public final static double RELIC_CLAW_OPEN = 0.0;
