@@ -47,12 +47,14 @@ public class AutoBlue2 extends LinearOpMode {
         Color.RGBToHSV(robot.blueColor.red() * 8, robot.blueColor.green() * 8, robot.blueColor.blue() * 8, hsvValues);
 
         //move the servo into detect position
-        robot.jewelServoBlue.setPosition(1.0);
+        robot.jewelServoBlue.setPosition(0.959);
 
         sleep(250);
 
 
         robot.bluePlateDistance(0.5, 500);
+
+        runtime.reset();
 
         while(opModeIsActive() && autoTrip <1)
         {

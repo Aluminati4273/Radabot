@@ -51,7 +51,9 @@ import android.graphics.Color;
 
                 sleep(250);
 
-                robot.bluePlateDistance(0.5, 500);
+                robot.bluePlateDistance(0.5, 450);
+
+                runtime.reset();
 
                 while(opModeIsActive() && autoTrip <1)
                 {

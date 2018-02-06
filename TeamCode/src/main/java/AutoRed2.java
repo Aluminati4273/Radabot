@@ -53,6 +53,8 @@ public class AutoRed2 extends LinearOpMode {
 
         robot.bluePlateDistance(0.5, 500);
 
+        runtime.reset();
+
         while(opModeIsActive() && autoTrip <1)
         {
 
