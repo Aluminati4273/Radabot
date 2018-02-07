@@ -19,12 +19,11 @@ public class RadabotTeleOp extends LinearOpMode {
     HardwareRadabot robot = new HardwareRadabot();           // Use Hardware from HardwareRadabot
 
     // Declare
+    double left = 0;
+    double right = 0;
 
     @Override
     public void runOpMode() {
-        double left;
-        double right;
-
 
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
@@ -37,14 +36,32 @@ public class RadabotTeleOp extends LinearOpMode {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        
+
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-            left = -gamepad1.left_stick_y ;
-            right = -gamepad1.right_stick_y ;
+           if(robot.driveState) {
+               left = -gamepad1.left_stick_y;
+               right = -gamepad1.right_stick_y;
+           }
 
+           // if driveState is false (see below) then the drive power is cut in half
+           if(!robot.driveState){
+               left = -gamepad1.left_stick_y/2;
+               right = -gamepad1.right_stick_y/2;
+           }
+
+            //change driveState to true when right bumper is hit (driving to full speed)
+           if(gamepad1.right_bumper)
+           {
+               robot.driveState = true;
+           }
+
+           //change driveState to false when left bumper is hit (driving to half speed)
+           if(gamepad1.left_bumper) {
+               robot.driveState = false;
+           }
 
             // left drive for robot using gamepad1 sticks (tank drive)
             robot.leftFrontDrive.setPower(left);
@@ -112,7 +129,7 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
             // move the relic up (horizontal) if less than 1.0 position
-            if (gamepad1.left_bumper)
+            if (gamepad1.b)
             {
                 if(robot.relicLift.getPosition()< 1.0)
                 {
@@ -121,7 +138,7 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
             //move the relic down (vertical) if more than 0.0 position
-            if(gamepad1.right_bumper)
+            if(gamepad1.a)
             {
                 if(robot.relicLift.getPosition()> 0.0)
                 {
