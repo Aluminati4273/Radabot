@@ -23,6 +23,8 @@ public class RadabotRegisterOpModes
         manager.register("DriveByEncoderSimple", DriveByEncoderSimple.class);
         manager.register("DriveByEncoderSimple2", DriveByEncoderSimple2.class);
         manager.register("AutoBlue1Advanced",AutoBlue1Advanced.class);
+        manager.register("GyroTesting",GyroTesting.class);
+
 
       // Basic Templates
       // manager.register("Iterative Opmode",       BasicOpMode_Iterative.class);

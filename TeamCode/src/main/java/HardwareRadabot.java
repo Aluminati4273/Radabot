@@ -99,28 +99,24 @@ public class HardwareRadabot
 
     //set up and down positions for the lift "bottom out" notification servo flag
     public final static double FLAG_UP = 0.0;
-    public final static double FLAG_DOWN = 0.5;
+    public final static double FLAG_DOWN = 1.0;
 
     //set power for the lift motor
     public final static double down = 0.5;
     public final static double up = 1.0;
 
-
-
-     public final static double GLYPH1_START = 0.8;
-   public final static double GLYPH2_START = 0.0;
-   public final static double GLYPH3_START = 0.1;
-   public final static double GLYPH4_START = 0.85;
-   public final static double GLYPH1_OPEN = 0.24;
-   public final static double GLYPH2_OPEN = 0.44;
-   public final static double GLYPH3_OPEN = 0.7;
-   public final static double GLYPH4_OPEN = 0.3;
-   public final static double GLYPH1_CLOSED = 0.6;
-   public final static double GLYPH2_CLOSED = 0.2;
-   public final static double GLYPH3_CLOSED = 0.32;
-   public final static double GLYPH4_CLOSED = 0.7;
-
-
+    public final static double GLYPH1_START = 0.56;
+   public final static double GLYPH2_START = 0.08;
+   public final static double GLYPH3_START = 0.656;
+   public final static double GLYPH4_START = 0.296;
+   public final static double GLYPH1_OPEN = 0.28;
+   public final static double GLYPH2_OPEN = 0.36;
+   public final static double GLYPH3_OPEN = 0.376;
+   public final static double GLYPH4_OPEN = 0.544;
+   public final static double GLYPH1_CLOSED = 0.0;
+   public final static double GLYPH2_CLOSED = 0.8;
+   public final static double GLYPH3_CLOSED = 0.096;
+   public final static double GLYPH4_CLOSED = 0.904;
 
     // set all locations and positions for the glyph servos
 
