@@ -22,6 +22,8 @@ public class RadabotTeleOp extends LinearOpMode {
     double left = 0;
     double right = 0;
 
+    boolean driveHalfSpeed = false;
+
     @Override
     public void runOpMode() {
 
@@ -41,26 +43,26 @@ public class RadabotTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-           if(robot.driveState) {
+            robot.currDriveState = gamepad1.right_bumper;
+
+
+            if (robot.currDriveState && (robot.currDriveState != robot.prevDriveState))  {
+
+                // button is transitioning to a pressed state. So Toggle halfSpeedDrive State
+                driveHalfSpeed = !driveHalfSpeed;
+                driveHalfSpeed = true;
+            }
+
+            // the driveHalfSpeed state is false the drive power is full
+           if(!driveHalfSpeed) {
                left = -gamepad1.left_stick_y;
                right = -gamepad1.right_stick_y;
            }
 
-           // if driveState is false (see below) then the drive power is cut in half
-           if(!robot.driveState){
+           // if driveHalfSpeed is true then the drive power is cut in half
+           if(driveHalfSpeed){
                left = -gamepad1.left_stick_y/2;
                right = -gamepad1.right_stick_y/2;
-           }
-
-            //change driveState to true when right bumper is hit (driving to full speed)
-           if(gamepad1.right_bumper)
-           {
-               robot.driveState = true;
-           }
-
-           //change driveState to false when left bumper is hit (driving to half speed)
-           if(gamepad1.left_bumper) {
-               robot.driveState = false;
            }
 
             // left drive for robot using gamepad1 sticks (tank drive)

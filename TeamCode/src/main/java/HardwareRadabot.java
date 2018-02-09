@@ -56,7 +56,8 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
  */
 public class HardwareRadabot
 {
-    public boolean driveState = true;
+    public boolean currDriveState = false;
+    public boolean prevDriveState = false;
 
     /* Public OpMode members. */
     // set up the drive train, set = null that way it doesnt run
