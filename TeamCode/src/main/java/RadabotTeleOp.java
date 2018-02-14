@@ -46,11 +46,13 @@ public class RadabotTeleOp extends LinearOpMode {
             robot.currDriveState = gamepad1.right_bumper;
 
 
+
+
             if (robot.currDriveState && (robot.currDriveState != robot.prevDriveState))  {
 
                 // button is transitioning to a pressed state. So Toggle halfSpeedDrive State
                 driveHalfSpeed = !driveHalfSpeed;
-                driveHalfSpeed = true;
+                //driveHalfSpeed = true;
             }
 
             // the driveHalfSpeed state is false the drive power is full
@@ -113,7 +115,7 @@ public class RadabotTeleOp extends LinearOpMode {
             }
 
             // move the relic claw incrementally if less than 1.0 position
-            if (gamepad1.x)
+            if (gamepad1.x && gamepad1.right_trigger> robot.threshold1)
             {
                 if(robot.relicClaw.getPosition()< 1.0)
                 {
@@ -147,8 +149,6 @@ public class RadabotTeleOp extends LinearOpMode {
                     robot.relicLift.setPosition(robot.relicLift.getPosition() - 0.025);
                 }
             }
-
-
 
 
 

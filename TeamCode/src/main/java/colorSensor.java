@@ -32,6 +32,8 @@
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsUsbDeviceInterfaceModule;
 import android.graphics.Color;
+
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.I2cController;
@@ -41,6 +43,8 @@ import com.qualcomm.robotcore.util.TypeConversion;
 
 import java.util.concurrent.locks.Lock;
 
+
+@Disabled
 public class colorSensor extends I2cControllerPortDeviceImpl implements ColorSensor, I2cController.I2cPortReadyCallback {
 
     //------------------------------------------------------------------------------------------------

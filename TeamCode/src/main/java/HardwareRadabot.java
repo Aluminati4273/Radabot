@@ -217,7 +217,7 @@ public class HardwareRadabot
 
 
     }
-        //method for opening claw
+        //method for opening glyph claw
         public void openClaw()
         {
             glyphServo1.setPosition(GLYPH1_OPEN);
@@ -227,7 +227,7 @@ public class HardwareRadabot
             glyphState = true;
         }
 
-        //method for closing claw
+        //method for closing glyph claw
         public void closeClaw()
         {
             glyphServo1.setPosition(GLYPH1_CLOSED);

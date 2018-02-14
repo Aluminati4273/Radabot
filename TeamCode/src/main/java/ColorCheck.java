@@ -12,6 +12,8 @@ import com.qualcomm.robotcore.hardware.I2cAddr;
 
 import org.firstinspires.ftc.robotcore.internal.hardware.DragonboardGPIOPin;
 
+
+@Disabled
 public class ColorCheck extends LinearOpMode {
 
     /* Declare OpMode members. */

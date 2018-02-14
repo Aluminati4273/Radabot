@@ -1,4 +1,5 @@
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -9,7 +10,7 @@ import android.graphics.Color;
  * parking zone.
  */
 
-
+@Disabled
 @Autonomous(name="AutoColorTest", group="Auto")
 
 public class AutoColorTest extends LinearOpMode {

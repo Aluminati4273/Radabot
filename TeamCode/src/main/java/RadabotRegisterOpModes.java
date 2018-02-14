@@ -24,6 +24,7 @@ public class RadabotRegisterOpModes
         manager.register("DriveByEncoderSimple2", DriveByEncoderSimple2.class);
         manager.register("AutoBlue1Advanced",AutoBlue1Advanced.class);
         manager.register("GyroTesting",GyroTesting.class);
+        manager.register("AutoBlue2Advanced", AutoBlue2Advanced.class);
 
 
       // Basic Templates

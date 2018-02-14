@@ -46,6 +46,11 @@ public class AutoBlue2 extends LinearOpMode {
         // convert the RGB values to HSV values.
         Color.RGBToHSV(robot.blueColor.red() * 8, robot.blueColor.green() * 8, robot.blueColor.blue() * 8, hsvValues);
 
+        // close the glyph claws so they are out of the way when the slide plate needs to return to center position
+        robot.closeClaw();
+
+        sleep (500);
+
         //move the servo into detect position
         robot.jewelServoBlue.setPosition(0.959);
 
